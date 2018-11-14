@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"math"
 	"math/rand"
-		"time"
+	"time"
 )
 
 /*
@@ -32,7 +32,7 @@ https://stackoverflow.com/questions/12321133/golang-random-number-generator-how-
 
 ----------------------------------------------------------------
 
-: Formats your code 
+: Formats your code
 gofmt -s -w .           // formats all files in current directory
 gofmt -s -w gotut.go    // formats provided file
 
