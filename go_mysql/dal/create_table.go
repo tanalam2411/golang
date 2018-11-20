@@ -5,12 +5,12 @@ import (
 	"fmt"
 	"os"
 
-	_ "github.com/lib/pq"
+	_ "github.com/go-sql-driver/mysql"
 )
 
 func ConnectAndCreateTable() {
 
-	db, err := sql.Open("postgres", connStr)
+	db, err := sql.Open("mysql", connStr)
 
 	if err != nil {
 		fmt.Println("Failed to connect DataBase.", err)
@@ -19,10 +19,10 @@ func ConnectAndCreateTable() {
 
 	rows, err := db.Query(`CREATE TABLE TestTable (
 		uuid  			varchar(100),
-		timestamp   	timestamp DEFAULT current_timestamp,
-		random_data 	bytea
+		timestamp		DATETIME DEFAULT CURRENT_TIMESTAMP,
+		random_data		BLOB
 
-);`)
+	);`)
 
 	if err != nil {
 		fmt.Println("Failed to create table testtable. Reason: ", err)
