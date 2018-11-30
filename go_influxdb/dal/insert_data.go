@@ -3,7 +3,7 @@ https://stackoverflow.com/questions/38067435/how-to-write-to-continuosly-write-t
 https://github.com/influxdata/influxdb/blob/master/client/example_test.go
 https://github.com/influxdata/influxdb/issues/756
 
-go get -u github.com/influxdb/influxdb/client
+go get github.com/influxdata/influxdb/client/v2
 
 */
 
