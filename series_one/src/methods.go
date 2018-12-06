@@ -25,6 +25,8 @@ type person struct {
 func (p person) calTax() float64 {
 
 	// Value receiver method
+	// You can't update person's attr
+	// p.salary = new_value // will not be updated
 
 	if float64(p.salary) > max_salary {
 		return .30*(max_salary) + .40*(float64(p.salary)-max_salary)
