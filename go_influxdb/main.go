@@ -7,6 +7,10 @@ import (
 	"os"
 )
 
+/*
+https://community.grafana.com/t/query-for-influxdb-to-select-a-range-of-tag-keys/10316/2
+*/
+
 func main() {
 
 	reader := bufio.NewReader(os.Stdin)
