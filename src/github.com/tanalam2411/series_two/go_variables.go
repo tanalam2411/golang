@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"strconv"
 )
 
 /*
@@ -31,8 +32,8 @@ var (
 )
 
 var (
-	class    string = "A"
-	ip_range string = "0-255"
+	class   string = "A"
+	ipRange string = "0-255"
 )
 
 func main() {
@@ -71,11 +72,25 @@ func main() {
 	fmt.Printf("%v, %T \n", a, a)
 
 	// Naming convention
+	// use camel case
 	// keep acronym uppercase
-	// e.g theHTTP,
+	// e.g theHTTP, ipURL
 
 	var fetchURL string = "www.google.com"
 
 	fmt.Printf("%v, %T \n", fetchURL, fetchURL)
 
+	//Type casting
+	var ii int = 33
+	fmt.Printf("%v, %T \n", ii, ii)
+
+	var jj float32
+	jj = float32(ii) //flotat32 to int is possible but will lose the decimal part
+	fmt.Printf("%v, %T \n", jj, jj)
+
+	var kk string
+	// kk = string(ii) // will return ascii value of the int number, eg: 42 will give *, 33 - !
+	// use strconv to do convert (int, float, ...) type to string
+	kk = strconv.Itoa(ii)
+	fmt.Printf("%v, %T \n", kk, kk)
 }
