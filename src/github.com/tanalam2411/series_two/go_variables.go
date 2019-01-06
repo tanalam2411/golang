@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"reflect"
 	"strconv"
 )
 
@@ -93,4 +94,8 @@ func main() {
 	// use strconv to do convert (int, float, ...) type to string
 	kk = strconv.Itoa(ii)
 	fmt.Printf("%v, %T \n", kk, kk)
+
+	fmt.Println(kk, reflect.TypeOf(kk))
 }
+
+// Failing Forward
