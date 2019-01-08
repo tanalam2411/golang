@@ -20,7 +20,7 @@ func main() {
 
 	// Boolean types - true/false
 	// Boolean is not an alias of any numeric or other type. So you can't convert to its ay quivalent other type like how you do in Python
-
+	// https://golang.org/ref/spec#Boolean_types
 	fmt.Println("**************** BOOLEAN ********************")
 
 	var b bool = true
@@ -40,6 +40,7 @@ func main() {
 	fmt.Println("**************** INT ********************")
 
 	// numeric type
+	// https://golang.org/ref/spec#Numeric_types
 	// Integer type (Signed numbers are both positive nad negative, Unsigned numbers are always positive numbers)
 	// int range:
 	// int 		-   min 32bit
@@ -116,6 +117,7 @@ func main() {
 
 	fmt.Println("**************** TEXT ********************")
 
+	// https://golang.org/ref/spec#String_types
 	// Text types :
 	// 1) String - Any utf-8 character
 	// String in go are aliases of bytes

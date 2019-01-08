@@ -7,6 +7,7 @@ import (
 )
 
 /*
+https://golang.org/ref/spec#Variables
 
 Agenda:
 * Variable declaration
