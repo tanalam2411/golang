@@ -73,5 +73,30 @@ func main() {
 
 	// Slices
 	fmt.Println("************** Slices *******************")
+	// We don't have to be specify size.
+	// Slice is a projection of the underlying array.
+	// thats why slice has another ket feature Capacity.
+	// Unlike array slices are bydefault reference type. so s2 := s1 will create reference not a sperate copy of data
+
+	s1 := []int{1, 2, 3}
+	s2 := s1
+	s2[1] = 100
+	fmt.Println(s1)
+	fmt.Println(s2)
+	fmt.Printf("Length of slice s1: %v \n", len(s1))
+	fmt.Printf("Capacity of slice s1: %v \n", cap(s1))
+
+	s3 := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+	// following slice operation works with arrays too. Try makings3 as array -> s3 := [...]int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+	s4 := s3[:]   // slice of all elements // start index to end index// just like Python
+	s5 := s3[3:]  // from index 3 till end [4 5 6 7 8 9 10]
+	s6 := s3[:6]  // from index 0 to 6-1 i.e 5 [1, 2, 3, 4, 5, 6]
+	s7 := s3[3:6] // from index 3 to 6-1 i.e 5 [4, 5, 6]
+
+	fmt.Println(s3)
+	fmt.Println(s4)
+	fmt.Println(s5)
+	fmt.Println(s6)
+	fmt.Println(s7)
 
 }
