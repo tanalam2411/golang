@@ -1,0 +1,1 @@
+$ tree -C -v -I 'vendor|bin|go_ip_rbl|go_pg|tmp'
