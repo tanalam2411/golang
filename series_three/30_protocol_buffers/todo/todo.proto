@@ -1,8 +1,0 @@
-syntax = "proto3";
-
-package todo;
-
-message Task {
-    string text = 1;
-    bool done = 2;
-}
