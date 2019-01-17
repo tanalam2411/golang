@@ -72,3 +72,15 @@ func main() {
 	fmt.Println("dupDeviceIPMap: ", dupDeviceIPMap)
 
 }
+
+/* SUMMARY
+
+- Maps
+  - Collections of value types that are accessed via keys
+  - Created via literals or via make function
+  - Members accessed via [key] syntax
+	- myMap["key"] = "value"
+  - Check for presence with "value, ok" format of result -> actual value, bool
+  - Reference type - Multiple assignments refer to same underlying data
+
+*/
