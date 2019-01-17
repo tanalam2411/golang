@@ -1,13 +1,10 @@
 package main
 
-import ()
+import (
+	"fmt"
+)
 
 /* AGENDA
-
-- Maps
-  - What are they?
-  - Creating
-  - Manipulation
 
 - Structs
   - What are they?
@@ -16,3 +13,7 @@ import ()
   - Embedding
   - Tags
 */
+
+func main() {
+
+}
