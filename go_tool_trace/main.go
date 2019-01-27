@@ -28,6 +28,7 @@ func main() {
 }
 
 //https://making.pusher.com/go-tool-trace/
+// Install graphviz - https://www.graphviz.org/
 /*
 ~/golang/go_tool_trace$ go run main.go
 Addition of 2 and 3 is equal to: 5
