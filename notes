@@ -1,1 +1,1 @@
-$ tree -C -v -I 'vendor|bin|go_ip_rbl|go_pg|tmp'
+$ tree -C -v -I 'vendor|bin|pkg|go_ip_rbl|go_pg|tmp|go_grpc_old|go_rpc|go_socket_programming'
