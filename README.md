@@ -46,7 +46,7 @@
 ├── pkg
 ├── scripts
 │   └── golang_setup_ubuntu.sh
-├── series_one
+├── series_1
 │   ├── agg.html
 │   ├── go_channels.go
 │   ├── go_rand.go
@@ -59,18 +59,7 @@
 │   ├── pull_info.go
 │   ├── simple_web_app.go
 │   └── struct.go
-├── series_three
-│   └── src
-│       └── 30_protocol_buffers
-│           ├── README.md
-│           ├── cmd
-│           │   └── todo
-│           │       └── main.go
-│           ├── mydb.pb
-│           └── todo
-│               ├── todo.pb.go
-│               └── todo.proto
-├── series_two
+├── series_2
 │   ├── go_01_introduction.go
 │   ├── go_02_variables.go
 │   ├── go_03_primitives.go
@@ -92,6 +81,17 @@
 │   ├── go_17_goroutines_2.go
 │   ├── go_18_channels_1.go
 │   └── go_18_channels_2_select.go
+├── series_3
+│   └── src
+│       └── 30_protocol_buffers
+│           ├── README.md
+│           ├── cmd
+│           │   └── todo
+│           │       └── main.go
+│           ├── mydb.pb
+│           └── todo
+│               ├── todo.pb.go
+│               └── todo.proto
 └── wiki
 
 ```
