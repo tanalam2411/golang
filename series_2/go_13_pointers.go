@@ -81,7 +81,6 @@ type myStruct struct {
 	bar string
 }
 
-
 /* SUMMARY
 
 - Creating pointers
@@ -105,3 +104,4 @@ type myStruct struct {
 - Types with internal pointers
      - All assignment operations in Go are copy operations
 IMP  - Slices and maps container poiinters, so copies point to same underlying data
+*/

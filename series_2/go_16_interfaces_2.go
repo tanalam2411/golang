@@ -63,14 +63,13 @@ func (myc myWriterCloser) Close() error {
 
 */
 
-
 /* SUMMARY
 
-- Basics 
+- Basics
 - Composing interfaces
 - Type conversion
 - The empty interface and type switches
 - Implementing with values vs. pointers
   - Method set of value is all the methods with value receivers
   - Method set of pointer is all methods, regardless of receiver type
-  
+*/
