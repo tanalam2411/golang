@@ -14,6 +14,7 @@ import (
 - For...range loops with channels
 - Select statements
 
+https://blog.golang.org/share-memory-by-communicating
 */
 
 var wg = sync.WaitGroup{}
