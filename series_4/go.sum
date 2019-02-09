@@ -1,0 +1,4 @@
+github.com/pkg/errors v0.8.1 h1:iURUrRGxPUNPdy5/HRSm+Yj6okJ6UtLINN0Q9M4+h3I=
+github.com/pkg/errors v0.8.1/go.mod h1:bwawxfHBFNV+L2hUp1rHADufV3IMtnDRdf1r5NINEl0=
+github.com/xiliax/go-lang-programming v0.0.0-20181009191850-8efccedc9656 h1:USUwBMZUzBmJur3pcxVRkJ42uytKsUd9oKyjHwwqfck=
+github.com/xiliax/go-lang-programming v0.0.0-20181009191850-8efccedc9656/go.mod h1:Vhaer3oEBnjkqSIfpBhmG115UG08OYxRzkZQTHGg+hY=
