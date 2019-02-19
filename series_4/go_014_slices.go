@@ -8,6 +8,8 @@ func main() {
 	sliceBasics()
 	fmt.Println("******************* sliceUsingMake ***********************")
 	sliceUsingMake()
+	fmt.Println("******************* sliceAppend ***********************")
+	sliceAppend()
 }
 
 func sliceBasics() {
@@ -41,14 +43,14 @@ func sliceUsingMake() {
 
 	var s0 = []int{}
 	var s1 = make([]int, 5)
-	var s2 = make([]int, 5, 10)
+	var s2 = make([]int, 0, 10)
 
 	fmt.Printf("s0: %#v, cap(s0): %#v, len(s0): %#v \n", s0, cap(s0), len(s0))
 	fmt.Printf("s1: %#v, cap(s1): %#v, len(s1): %#v \n", s1, cap(s1), len(s1))
 	fmt.Printf("s2: %#v, cap(s2): %#v, len(s2): %#v \n", s2, cap(s2), len(s2))
 
 	s1[4] = 100
-	s2[4] = 200
+	//s2[4] = 200
 	// s2[9] = 200 // panic: runtime error: index out of range
 	fmt.Printf("s1[10]: %#v \n", s1)
 	fmt.Printf("s2[10]: %#v \n", s2)
@@ -65,10 +67,73 @@ func sliceUsingMake() {
 		s1[i] = i + 10
 	}
 
-	for i :=0 ; i < len(s2) ; i++ {
-		s2[i] = i + 10
+	for i :=0 ; i < cap(s2) ; i++ {
+		//s2[i] = i + 10
+		s2 = append(s2, i + 10)
 	}
+
 
 	fmt.Println("s1:", s1)
 	fmt.Println("s2:", s2)
+
+	var testScores []int
+
+	var count = 10
+
+	testScores = make([]int, count)
+	testScores[0] = 56
+	testScores[1] = 67
+	testScores[2] = 43
+
+	printArray("testScores", testScores)
+}
+
+
+func printArray(n string, a []int) {
+	fmt.Printf("%v = %#v, len = %v, cap = %v \n", n, a, len(a), cap(a))
+}
+
+
+func sliceAppend() {
+	var s0 []int
+	printArray("s0", s0)
+
+	s0 = make([]int, 2, 3)  // len -2 , cap - 3
+	printArray("s0", s0)
+
+	s0[0] = 11
+	s0[1] = 12
+	printArray("s0", s0)
+
+	//s0 = append(s0, 13, 14, 15)
+	s0 = appendImpl(s0, 13, 14, 15)
+	printArray("s0", s0)
+}
+
+
+func appendImpl(s []int, e ...int) []int {
+	fmt.Println("s len", len(s))
+	fmt.Println("s cap", cap(s))
+	fmt.Println("e len", len(e))
+	fmt.Println("e cap", cap(e))
+
+	var t []int
+	if len(e) > (cap(s)-len(s)) {
+		t = make([]int, cap(s)+len(e))
+		for i:=0; i < len(s); i++{
+			t[i] = s[i]
+		}
+
+	} else {
+		t = s[:len(s)+len(e)]
+	}
+
+	fmt.Println("---", len(e), cap(e), e, "---", len(s), cap(s), s)
+	fmt.Println(t, len(t), cap(t))
+
+	for j:=0; j<len(e) ; j++ {
+		t[len(s)+j] = e[j]
+	}
+
+	return t
 }
