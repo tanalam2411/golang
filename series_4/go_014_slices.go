@@ -10,6 +10,8 @@ func main() {
 	sliceUsingMake()
 	fmt.Println("******************* sliceAppend ***********************")
 	sliceAppend()
+	fmt.Println("******************* spreadOperator ***********************")
+	spreadOperator()
 }
 
 func sliceBasics() {
@@ -136,4 +138,21 @@ func appendImpl(s []int, e ...int) []int {
 	}
 
 	return t
+}
+
+
+func spreadOperator() {
+
+	var a1 = [5]int{11, 22, 33, 44, 55}
+	var s1 = []int{110, 220, 330, 440, 550}
+
+	variadicFunction(a1...) // variadicFunction(a1[0], a1[1], a1[2], a1[3], a1[4])
+	variadicFunction(s1...) // variadicFunction(s1[0], s1[1], s1[2], s1[3], s1[4])
+}
+
+
+func variadicFunction(a ...int) {
+	for _, i := range a {
+		fmt.Println(i)
+	}
 }
