@@ -6,12 +6,18 @@ func main() {
 
 	fmt.Println("******************* sliceBasics ***********************")
 	sliceBasics()
+
 	fmt.Println("******************* sliceUsingMake ***********************")
 	sliceUsingMake()
+
 	fmt.Println("******************* sliceAppend ***********************")
 	sliceAppend()
+
 	fmt.Println("******************* spreadOperator ***********************")
 	spreadOperator()
+
+	fmt.Println("******************* copySlices ***********************")
+	copySlices()
 }
 
 func sliceBasics() {
@@ -87,29 +93,29 @@ func sliceUsingMake() {
 	testScores[1] = 67
 	testScores[2] = 43
 
-	printArray("testScores", testScores)
+	printSlice("testScores", testScores)
 }
 
 
-func printArray(n string, a []int) {
+func printSlice(n string, a []int) {
 	fmt.Printf("%v = %#v, len = %v, cap = %v \n", n, a, len(a), cap(a))
 }
 
 
 func sliceAppend() {
 	var s0 []int
-	printArray("s0", s0)
+	printSlice("s0", s0)
 
 	s0 = make([]int, 2, 3)  // len -2 , cap - 3
-	printArray("s0", s0)
+	printSlice("s0", s0)
 
 	s0[0] = 11
 	s0[1] = 12
-	printArray("s0", s0)
+	printSlice("s0", s0)
 
 	//s0 = append(s0, 13, 14, 15)
 	s0 = appendImpl(s0, 13, 14, 15)
-	printArray("s0", s0)
+	printSlice("s0", s0)
 }
 
 
@@ -143,7 +149,7 @@ func appendImpl(s []int, e ...int) []int {
 
 func spreadOperator() {
 
-	var a1 = [5]int{11, 22, 33, 44, 55}
+	var a1 = []int{11, 22, 33, 44, 55}
 	var s1 = []int{110, 220, 330, 440, 550}
 
 	variadicFunction(a1...) // variadicFunction(a1[0], a1[1], a1[2], a1[3], a1[4])
@@ -155,4 +161,22 @@ func variadicFunction(a ...int) {
 	for _, i := range a {
 		fmt.Println(i)
 	}
+}
+
+
+func copySlices() {
+	
+	var dst []int
+	copy(dst, []int{12, 23})
+	printSlice("dst", dst)
+	
+	var s = []int{4, 56}
+	dst = make([]int, 10)
+	copy(dst, s)
+	printSlice("dst", dst)
+
+	var t = []int{40, 563}
+	dst = make([]int, 10)
+	copy(dst, t)
+	printSlice("dst", t)
 }
