@@ -18,6 +18,9 @@ func main() {
 
 	fmt.Println("******************* copySlices ***********************")
 	copySlices()
+
+	fmt.Println("******************* iterRangeOnlyIndex ***********************")
+	iterRangeOnlyIndex()
 }
 
 func sliceBasics() {
@@ -176,7 +179,47 @@ func copySlices() {
 	printSlice("dst", dst)
 
 	var t = []int{40, 563}
-	dst = make([]int, 10)
+	dst = make([]int, 2)
 	copy(dst, t)
-	printSlice("dst", t)
+	printSlice("dst", dst)
+
+	s = []int{1, 2, 3, 4, 5}
+	printSlice("s", s)
+
+	var src = s[:4]
+	dst = s[1:4]
+	printSlice("Before copy src", src)
+	printSlice("Before copy dst", dst)
+
+	fmt.Println("copying - copy(dst, src)")
+	copy(dst, src)
+	printSlice("After copy src", src)
+	printSlice("After copy dst", dst)
+	printSlice("After copy s", s)
+
+
+}
+
+
+func iterRangeOnlyIndex() {
+
+	s1 := []int{10, 20, 30, 40, 50}
+
+
+	for index, value := range(s1) {
+		fmt.Println(index, value)
+	}
+
+
+	for index, _ := range(s1) {
+		fmt.Println(index)
+	}
+
+	for _, value := range(s1) {
+		fmt.Println(value)
+	}
+
+	for index := range(s1) {
+		fmt.Println(index)
+	}
 }
