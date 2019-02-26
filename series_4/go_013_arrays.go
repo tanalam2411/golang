@@ -20,7 +20,7 @@ type Date struct {
 	day   int
 }
 
-type Person struct {
+type Guy struct {
 	dob  Date
 	name string
 	age  int
@@ -77,9 +77,9 @@ func printTestResults() {
 }
 
 func readPerson() {
-	var people [10]Person
+	var people [10]Guy
 
-	fmt.Printf("Person: %#v \n\n", people[0])
+	fmt.Printf("Guy: %#v \n\n", people[0])
 }
 
 func arraySender() ([10]int, *[10]int) {
