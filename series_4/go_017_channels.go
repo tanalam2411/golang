@@ -73,3 +73,8 @@ func canOnlyWrite(c chan<- int) {
 	c <- 30
 	close(c)
 }
+
+
+func receviceOnlyChaneel() {
+	
+}
