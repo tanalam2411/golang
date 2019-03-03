@@ -50,9 +50,11 @@ func sendOnlyChannel() {
 	canOnlyWrite(producerChannel)
 	fmt.Println("len of producerChannel: ", len(producerChannel))
 
-	for each := range producerChannel {
-		fmt.Println("each: ", each)
-	}
+	//for each := range producerChannel {
+	//	fmt.Println("each: ", each)
+	//}
+	canOnlyRead(producerChannel)
+
 
 	fmt.Println("len of producerChannel: ", len(producerChannel))
 }
@@ -75,6 +77,15 @@ func canOnlyWrite(c chan<- int) {
 }
 
 
-func receviceOnlyChaneel() {
-	
+func canOnlyRead(c <-chan int) {
+
+	/*
+	c <- 40 // is not allowed as the channel is receive only <-
+	 */
+
+	for v := range c{
+		fmt.Printf("\n Reading value v: %#v \n", v)
+	}
+
+
 }
