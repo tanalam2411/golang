@@ -1,11 +1,22 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"math"
+)
 
 /*
 A channel provides a mechanism for concurrently executing functions to communicate by sending
 and receiving values of a specified element type.
 The value of an uninitialized channel is nil.
+
+Associativity of <-
+
+Channel of Channels                  Meaning
+chan<- chan int                    chan<- (chan int)
+chan<- <-chan int                  chan<- (<-chan int)
+<-chan <-chan int                  <-chan (<-chan int)
+chan (<-chan int)
 */
 
 
@@ -39,6 +50,9 @@ func main() {
 
 	fmt.Println("------------------ sendOnlyChannel ---------------")
 	sendOnlyChannel()
+
+	fmt.Println("------------------- funcReturningChannel ------------------")
+	funcReturningChannel()
 }
 
 
@@ -88,4 +102,39 @@ func canOnlyRead(c <-chan int) {
 	}
 
 
+}
+
+
+func funcReturningChannel() {
+
+
+	c := sendReadOnlyChannel()
+	out := squRootNums(c)
+
+	canOnlyRead(out)
+}
+
+func sendReadOnlyChannel() <-chan int {
+
+	out := make(chan int, 5)
+	out <- 100
+	out <- 200
+	out <- 300
+	close(out)
+	return out
+}
+
+func squRootNums(c <-chan int) <-chan int {
+
+	var result chan int
+
+	result = make(chan int, len(c))
+
+	for num := range c {
+		x := float64(num)
+		result <- int(math.Sqrt(x))
+	}
+
+	close(result)
+	return result
 }
