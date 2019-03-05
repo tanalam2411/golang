@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"math"
+	"time"
 )
 
 /*
@@ -53,6 +54,9 @@ func main() {
 
 	fmt.Println("------------------- funcReturningChannel ------------------")
 	funcReturningChannel()
+
+	fmt.Println("------------------- channelTime ------------------")
+	channelTime()
 }
 
 
@@ -137,4 +141,18 @@ func squRootNums(c <-chan int) <-chan int {
 
 	close(result)
 	return result
+}
+
+
+func channelTime() {
+
+	start := time.Now()
+	fmt.Printf("Start: %v \n", start)
+
+	c := time.After(2 * time.Second)
+	end := time.Now()
+	fmt.Println("Will execute")
+	// will executed after 2 * time.Second ( 2 seconds)
+	fmt.Printf("c    : %v \n", <-c) // will block till 2 seconds while reading from channel
+	fmt.Printf("end  : %v \n", end)
 }
