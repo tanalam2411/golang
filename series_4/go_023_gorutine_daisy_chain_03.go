@@ -40,3 +40,8 @@ func worker(in chan int) chan int {
 
 	return out
 }
+
+
+/*
+GOMAXPROCS=4 time go run go_023_gorutine_daisy_chain_03.go
+*/
