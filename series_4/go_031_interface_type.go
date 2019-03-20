@@ -46,16 +46,65 @@ type IndianRunner struct {
 }
 
 
+type Watervale struct {
+	name string
+	weight int
+}
+
+
+type Duck interface {
+	Quack()
+	Waddle()
+}
+
 
 func main() {
 	var kid1 = Kid{"Max", 30}
 	var kid2 = Kid{"Trut", 29}
 
-	printPerson(kid1)
-	printPerson(kid2)
+	printKid(kid1)
+	fmt.Println(kid2)
+
+	var duck0 = Watervale{"Swimmer", 10}
+	//duck0.Waddle()
+	callDuck(duck0)
+
+	var duck1 = IndianRunner{"Speedy", 100}
+	duck1.Waddle()
+	duck1.Quack()
+
 }
 
 
-func printPerson(k Kid) {
-	fmt.Printf("Person name: %v, age %v \n", k.name, k.age)
+func printKid(k Kid) {
+	fmt.Printf("Kid's name: %v, age %v \n", k.name, k.age)
+}
+
+
+func (k Kid) String() string {
+	return fmt.Sprintf("Kid's name: %v, age %v \n", k.name, k.age)
+}
+
+
+func callDuck(d Duck) {
+	d.Quack()
+	d.Waddle()
+}
+
+
+func (d Watervale) Waddle() {
+	fmt.Printf("Watervale Waddle - %v\n", d.name)
+}
+
+func (d Watervale) Quack() {
+	fmt.Printf("Watervale Quack - %v\n", d.name)
+}
+
+
+func (d IndianRunner) Waddle() {
+	fmt.Printf("IndianRunner Waddle - %v\n", d.name)
+}
+
+func (d IndianRunner) Quack() {
+	fmt.Printf("IndianRunner Quack - %v\n", d.name)
 }
