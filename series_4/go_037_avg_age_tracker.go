@@ -19,6 +19,9 @@ type AgeAverager struct {
 
 func main() {
 
+	var bb byte
+	bb = 255 // > 255 // constant 256 overflows byte
+	fmt.Println("bb: ", bb)
 
 	a := person{"a", 23}
 	b := person{"b", 56}
