@@ -1,74 +1,97 @@
-//package main
-//
-//import (
-//	"fmt"
-//	"os"
-//)
-//
-//var longListing = false
-//
-//
-//func main() {
-//	offset := 1
-//
-//	if len(os.Args) >= 2 && os.Args[offset] == "-l" {
-//		longListing = true
-//		offset++
-//	}
-//
-//	files := os.Args[offset:]
-//
-//	if len(files) == 0 {
-//		files = []string{"."}
-//	}
-//
-//	if longListing {
-//		showLongListing(files)
-//		return
-//	}
-//
-//	showShortListing(files)
-//}
-//
-//
-//func showShortListing(files []string) {
-//	var noFilesList []string
-//	var filesList []string
-//	var dirListing []string
-//
-//	for _, f := range files {
-//		fi, err := os.Stat(f)
-//
-//		if err != nil {
-//			s := fmt.Sprintf("ls: %v: no file or direvtory", f)
-//			noFilesList = append(noFilesList, s)
-//			continue
-//		}
-//	}
-//}
-
-
-
-
-
 package main
 
 import (
 	"fmt"
-	"io/ioutil"
 	"os"
 )
 
+var longListing = false
+
+
 func main() {
-	rescueStdout := os.Stdout
-	r, w, _ := os.Pipe()
-	os.Stdout = w
+	offset := 1
 
-	fmt.Println("Hello, playground") // this gets captured
+	if len(os.Args) >= 2 && os.Args[offset] == "-l" {
+		longListing = true
+		offset++
+	}
 
-	w.Close()
-	out, _ := ioutil.ReadAll(r)
-	os.Stdout = rescueStdout
+	files := os.Args[offset:]
 
-	fmt.Printf("Captured: %s", out) // prints: Captured: Hello, playground
+	if len(files) == 0 {
+		files = []string{"."}
+	}
+
+	if longListing {
+		showLongListing(files)
+		return
+	}
+
+	showShortListing(files)
+}
+
+
+func showShortListing(files []string) {
+	var noFilesList []string
+	var filesList []string
+	var dirListing []string
+
+	for _, f := range files {
+		fi, err := os.Stat(f)
+
+		if err != nil {
+			s := fmt.Sprintf("ls: %v: no file or direvtory", f)
+			noFilesList = append(noFilesList, s)
+			continue
+		}
+
+		if !fi.IsDir() {
+			filesList = append(filesList, f)
+			continue
+		}
+
+		dirListing = addDirListing(dirListing, f)
+	}
+
+
+	for _, s := range noFilesList {
+		fmt.Println(s)
+	}
+
+	for _, s := range filesList {
+		fmt.Println(s)
+	}
+
+	for _, s := range dirListing {
+		fmt.Println(s)
+	}
+
+}
+
+
+func addDirListing(listing []string, f string) []string {
+	dir, err := os.Open(f)
+
+	if err != nil {
+		return listing
+	}
+
+	fileNames, err := dir.Readdirnames(0)
+
+	if err != nil {
+		return listing
+	}
+
+	listing = append(listing, "\n"+f+":")
+
+	for _, d := range fileNames {
+		listing = append(listing, d)
+	}
+
+	return listing
+}
+
+
+func showLongListing(files []string) {
+	fmt.Println("showing long listing for: ", files)
 }
