@@ -95,3 +95,9 @@ func addDirListing(listing []string, f string) []string {
 func showLongListing(files []string) {
 	fmt.Println("showing long listing for: ", files)
 }
+
+
+func permString(m os.FileMode) string {
+	p := "rw-r--r--"
+	return p
+}
