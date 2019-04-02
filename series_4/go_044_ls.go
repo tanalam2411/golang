@@ -97,6 +97,36 @@ func showLongListing(files []string) {
 }
 
 
+func calSize(i int64) string {
+	s := float64(i)
+	unit := "B" //bytes
+
+	if (s/1024) > 1.0 {
+		s = s / 1024
+		unit = "K"
+	}
+
+	if (s/1024) > 1.0 {
+		s = s / 1024
+		unit = "M"
+	}
+
+	if (s/1024) > 1.0 {
+		s = s / 1024
+		unit = "G"
+	}
+
+	if (s/1024) > 1.0 {
+		s = s / 1024
+		unit = "T"
+	}
+
+	return fmt.Sprintf("%5.2v%v", s, unit)
+}
+
+
+
+
 func permString(m os.FileMode) string {
 	p := "rw-r--r--"
 	return p
