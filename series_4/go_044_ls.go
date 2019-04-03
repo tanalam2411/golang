@@ -94,7 +94,45 @@ func addDirListing(listing []string, f string) []string {
 
 func showLongListing(files []string) {
 	fmt.Println("showing long listing for: ", files)
+
+	var noFilesList []string
+	var filesList []string
+	var dirListing []string
+
+	for _, f := range files {
+		fi, err := os.Stat(f)
+
+		if err != nil {
+			s := fmt.Sprintf("ls: %v: no file or directory", f)
+			noFilesList = append(noFilesList, s)
+			continue
+		}
+
+		if !fi.IsDir() {
+			size := calSize(fi.Size())
+			perm := permString(fi.Mode())
+			s := fmt.Sprintf("-%v %v %s", perm, size, f)
+			filesList = append(filesList, s)
+			continue
+		}
+
+		dirListing = addDirListing(dirListing, f)
+	}
+
+
+	for _, s := range noFilesList {
+		fmt.Println(s)
+	}
+
+	for _, s := range filesList {
+		fmt.Println(s)
+	}
+
+	for _, s := range dirListing {
+		fmt.Println(s)
+	}
 }
+
 
 
 func calSize(i int64) string {
