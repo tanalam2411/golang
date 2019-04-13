@@ -1,1 +1,6 @@
 package f
+
+
+func main() {
+
+}
