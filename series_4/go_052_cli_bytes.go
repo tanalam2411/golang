@@ -3,6 +3,8 @@ package main
 import (
 	"bytes"
 	"fmt"
+	"log"
+	"os"
 )
 
 func main() {
@@ -12,4 +14,12 @@ func main() {
 	(&b).Write([]byte("Hello, world!!!\n"))
 	fmt.Fprintf(&b, "Holy %s \n", "smokes batman!")
 	fmt.Println(b.String())
+
+	f, err := os.Open("main.go")
+
+	if err != nil {
+		log.Fatalln(err)
+	}
+
+	defer f.Close()
 }
