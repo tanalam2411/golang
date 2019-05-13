@@ -17,6 +17,18 @@ func main() {
 
 	linesCh := readFile("data.csv")
 
+	header := get_header(linesCh)
+
+	fmt.Printf("%-15s %4s %8s\n",
+		fixHeader(header[0]), fixHeader(header[1]),
+		fixHeader(header[2]))
+
+	personCh := get_row(linesCh)
+
+	for p := range personCh {
+		fmt.Printf("%-15v %4v %8.1f\n", p.name, p.age, p.height)
+	}
+
 }
 
 func fixHeader(s string) string {
@@ -25,8 +37,8 @@ func fixHeader(s string) string {
 }
 
 
-func getRow(in <-chan string) (ch <-chan *Person) {
-	c := make(chan *Person)
+func get_row(in <-chan string) (ch <-chan *P) {
+	c := make(chan *P)
 
 	go func() {
 		var name string
@@ -42,9 +54,24 @@ func getRow(in <-chan string) (ch <-chan *Person) {
 			case 3:
 				fmt.Sscan(fields[2], &height)
 				fallthrough
+			case 2:
+				fmt.Sscan(fields[1], &age)
+				fallthrough
+			case 1:
+				name = strings.TrimSpace(fields[0])
+				name = strings.Title(strings.ToLower(name))
 			}
+
+			c <- &P{name: name, age: age, height: height}
+			name = ""
+			age = 0
+			height = 0.0
 		}
+
+		close(c)
 	}()
+
+	return c
 }
 
 func get_header(in <-chan string) (header []string) {
