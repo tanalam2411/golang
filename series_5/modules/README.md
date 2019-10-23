@@ -356,5 +356,16 @@ ok      example.com/hello       0.003s
 
 
 ________________________________________________________________________________
+
+**Publishing Go Modules**
+
+- Tag - Alias of git hash
+ - Lightweight Tag - Simple pointer to a git commit hash
+ - Annotated Tag - Full object (tagger's name, msg, etc)
+
+________________________________________________________________________________
 Refs:
 - https://blog.golang.org/using-go-modules
+- https://medium.com/rungo/anatomy-of-modules-in-go-c8274d215c16
+- https://git-scm.com/book/en/v2/Git-Basics-Tagging
+- *** https://github.com/golang/go/wiki/Modules
