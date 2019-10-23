@@ -353,3 +353,8 @@ modules/hello$ go test
 PASS
 ok      example.com/hello       0.003s
 ```
+
+
+________________________________________________________________________________
+Refs:
+- https://blog.golang.org/using-go-modules
