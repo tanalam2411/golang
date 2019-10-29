@@ -2,6 +2,39 @@
 
 **[Learn more on Wiki](https://github.com/tanalam2411/golang/wiki)**
 
+**Programming In Go** [PIG]
+- [Introduction](https://github.com/tanalam2411/golang/wiki/PIG-Introduction)
+  - [Communicating Sequential Processes](https://github.com/tanalam2411/golang/wiki/PIG-Communicating-Sequential-Processes)
+
+
+______________________________________________________________________________________________
+GO Modules
+  - [Introduction](https://github.com/tanalam2411/golang/wiki/GM-Go-Modules-Introduction)
+  - [A Tour of Versioned Go (vgo)](https://github.com/tanalam2411/golang/wiki/GM-A-Tour-of-Versioned-Go-(vgo))
+  - [Semantic Import Versioning](https://github.com/tanalam2411/golang/wiki/GM-Semantic-Import-Versioning)
+  - [Minimal Version Selection](https://github.com/tanalam2411/golang/wiki/GM-Minimal-Version-Selection)
+  - [Reproducible, Verifiable, Verified Builds](https://github.com/tanalam2411/golang/wiki/GM-Reproducible,-Verifiable,-Verified-Builds)
+  - [Defining Go Modules](https://github.com/tanalam2411/golang/wiki/GM-Defining-Go-Modules)
+
+
+
+______________________________________________________________________________________________
+Upgrading golang version
+- [Upgrading Golang Version Ubuntu](https://github.com/tanalam2411/golang/wiki/UGV-Upgrading-Golang-Version-Ubuntu)
+
+______________________________________________________________________________________________
+
+Learning Go
+
+1. [Must Reads](https://github.com/tanalam2411/golang/wiki/1.-Must-Reads)
+2. [Golang projects](https://github.com/tanalam2411/golang/wiki/2.-Golang-projects)
+3. [Golang-Packages](https://github.com/tanalam2411/golang/wiki/3.-Golang-Packages)
+4. [Companies](https://github.com/tanalam2411/golang/wiki/4.-Companies)
+5. [Golang FreeBSD setup](https://github.com/tanalam2411/golang/wiki/5.-Golang-FreeBSD-setup)
+6. [GoSublime plugin intigration with Sublime3 on Ubuntu](https://github.com/tanalam2411/golang/wiki/3.-GoSublime-plugin-intigration-with-Sublime3-on-Ubuntu)
+
+
+
 ```
 ├── CODE_OF_CONDUCT.md
 ├── LICENSE
