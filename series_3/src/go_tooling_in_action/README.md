@@ -235,3 +235,88 @@ So we can see that we need to handle error at line no. `11`
 ```
 
 And it works fine.
+
+Now try go build again (will show no error):
+
+```bash
+go_tooling_in_action$ go build
+```
+
+Try `go vet` now:
+```bash
+go_tooling_in_action$ go vet
+# golang/series_3/src/go_tooling_in_action
+./main.go:27:3: Fprintln call has possible formatting directive %s
+```
+
+`go vet`: Vet examines Go source code and reports suspicious constructs. (`go doc cmd/vet`)
+
+Now when we're hitting this url `http://localhost:8000/tan@golang.org` we're receiving panic error:
+
+```bash
+2019/11/19 10:37:40 http: panic serving [::1]:58216: runtime error: index out of range [1] with length 1
+
+go_tooling_in_action$ errcheck 
+main.go:27:14:	fmt.Fprintf(w, "Hello, gopher %s\n", match[1])
+main.go:31:14:	fmt.Fprintln(w, "Hello, world !!!")
+```
+
+So let's try debugging the code.
+
+**Debugging Go**
+
+Will use `https://github.com/go-delve/delve` pkg for debugging.
+
+```bash
+go_tooling_in_action$ go get -u github.com/go-delve/delve/cmd/dlv
+
+go_tooling_in_action$ dlv -l http://localhost:8000 debug .
+
+(dlv) p path
+"tan@golang.org"
+(dlv) n
+> main.handler() ./main.go:28 (PC: 0x781773)
+    23:		runtime.Breakpoint()
+    24:		re := regexp.MustCompile("^(.+)@golang.org$")
+    25:		path := r.URL.Path[1:]
+    26:		match := re.FindAllStringSubmatch(path, -1) // -1 means match all
+    27:	
+=>  28:		if match != nil {
+    29:			fmt.Fprintf(w, "Hello, gopher %s\n", match[1])
+    30:			return
+    31:		}
+    32:	
+    33:		fmt.Fprintln(w, "Hello, world !!!")
+(dlv) p match
+[][]string len: 1, cap: 10, [
+	[
+		"tan@golang.org",
+		"tan",
+	],
+]
+
+```
+
+- `p <object>` here `p` stands for print.
+
+So we fixed the panic error with `match[0][1]`.
+
+
+-----
+
+**Unit Testing**
+
+`<name>_test.go` - files ending with `_test.go` are ignored by the `go build|install|get` etc and will only run on `go test`.
+
+Create `main_test.go` and run `go test`.
+```bash
+go_tooling_in_action$ go test
+PASS
+ok  	golang/series_3/src/go_tooling_in_action	0.003s
+```
+
+**Code Coverage**
+
+Press `ctrl+shift+p` then type `test coverage`
+
+![golang test with coverage](static/golang_test_with_coverage.png)

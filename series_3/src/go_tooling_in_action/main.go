@@ -17,14 +17,14 @@ func main() {
 	}
 }
 
-
 func handler(w http.ResponseWriter, r *http.Request) {
 	re := regexp.MustCompile("^(.+)@golang.org$")
-	path := r.URL.Path
+	path := r.URL.Path[1:]
 	match := re.FindAllStringSubmatch(path, -1) // -1 means match all
 
 	if match != nil {
-		fmt.Fprintln(w, "Hello, gopher %s", match[1])
+		fmt.Fprintf(w, "Hello, gopher %s\n", match[0][1])
+		return
 	}
 
 	fmt.Fprintln(w, "Hello, world !!!")
