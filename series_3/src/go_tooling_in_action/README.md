@@ -104,7 +104,7 @@ Hello, Go examples!
 
 5. `go doc and list` - extracting info from Go packages
 
-Show import path
+Show import path of the current pkg
 ```bash
 go_tooling_in_action$ go list
 golang/series_3/src/go_tooling_in_action
