@@ -364,3 +364,50 @@ Importing `pprof` (`_ "net/http/pprof"`) - `https://golang.org/pkg/net/http/ppro
 - `pprof` is a tool for visualization and analysis of profiling data.
 
 ![pprof_http_server.png](static/pprof_http_server.png)
+
+**Let's try go tool with pprof**
+
+1st terminal:
+```bash
+go_tooling_in_action$ go run main.go 
+Serving at http://localhost:8000 ...
+```
+
+2nd terminal:
+```bash
+go_tooling_in_action$ go-wrk -n 1000000 http://localhost:8000/tan@golang.org
+```
+
+3rd terminal:
+```bash
+go_tooling_in_action$ go tool pprof --seconds=10 localhost:8000/debug/pprof/profile
+Fetching profile over HTTP from http://localhost:8000/debug/pprof/profile?seconds=10
+Please wait... (10s)
+Saved profile in /home/tan/pprof/pprof.main.samples.cpu.004.pb.gz
+File: main
+Type: cpu
+Time: Nov 20, 2019 at 7:44am (IST)
+Duration: 10.11s, Total samples = 9.44s (93.35%)
+Entering interactive mode (type "help" for commands, "o" for options)
+(pprof) top
+Showing nodes accounting for 4790ms, 50.74% of 9440ms total
+Dropped 276 nodes (cum <= 47.20ms)
+Showing top 10 nodes out of 203
+      flat  flat%   sum%        cum   cum%
+    1860ms 19.70% 19.70%     1920ms 20.34%  syscall.Syscall
+     690ms  7.31% 27.01%      690ms  7.31%  runtime.futex
+     500ms  5.30% 32.31%      580ms  6.14%  syscall.Syscall6
+     420ms  4.45% 36.76%      420ms  4.45%  runtime.usleep
+     400ms  4.24% 41.00%      400ms  4.24%  runtime.epollwait
+     210ms  2.22% 43.22%     1630ms 17.27%  runtime.mallocgc
+     200ms  2.12% 45.34%      200ms  2.12%  runtime.epollctl
+     200ms  2.12% 47.46%      840ms  8.90%  runtime.heapBitsSetType
+     160ms  1.69% 49.15%      190ms  2.01%  runtime.step
+     150ms  1.59% 50.74%      340ms  3.60%  runtime.pcvalue
+(pprof) web
+(pprof)
+```
+
+`web` opens a svg file in browser:
+
+![pprof001.svg](static/pprof001.svg)
