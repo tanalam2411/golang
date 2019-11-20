@@ -11,6 +11,8 @@ import (
 
 // _ is for ignoring unsed package pprof
 
+var re = regexp.MustCompile("^(.+)@golang.org$")
+
 func main() {
 	http.HandleFunc("/", handler)
 	fmt.Println("Serving at http://localhost:8000 ...")
@@ -21,8 +23,7 @@ func main() {
 }
 
 func handler(w http.ResponseWriter, r *http.Request) {
-
-	re := regexp.MustCompile("^(.+)@golang.org$")
+	// re := regexp.MustCompile("^(.+)@golang.org$")
 	path := r.URL.Path[1:]
 	match := re.FindAllStringSubmatch(path, -1) // -1 means match all
 

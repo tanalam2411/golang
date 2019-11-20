@@ -1,5 +1,7 @@
 **Go Tooling in Action**
 
+[ref](https://github.com/campoy/go-tooling-workshop)
+
 1. Go code formatting:
 
 ```bash
@@ -411,3 +413,79 @@ Showing top 10 nodes out of 203
 `web` opens a svg file in browser:
 
 ![pprof001.svg](static/pprof001.svg)
+
+
+**[Flame Graphs](https://github.com/uber-archive/go-torch)**
+
+```bash
+go_tooling_in_action$ docker run --network=host -v $(pwd):/app -w /app uber/go-torch -t 5 -u http://192.168.0.11:8000
+INFO[03:42:37] Run pprof command: go tool pprof -raw -seconds 5 http://192.168.0.11:8000/debug/pprof/profile
+INFO[03:42:42] Writing svg to torch.svg
+```
+
+![torch.svg](static/torch.svg)
+
+
+
+-----
+**Benchmarks**
+
+- `go test -bench`
+
+```bash
+go_tooling_in_action$ go test -bench .
+goos: linux
+goarch: amd64
+pkg: golang/series_3/src/go_tooling_in_action
+BenchmarkHandler-4        248575              4425 ns/op
+PASS
+ok      golang/series_3/src/go_tooling_in_action        1.155s
+```
+
+`cpu profiling`
+```bash
+go_tooling_in_action$ go test -bench . -cpuprofile prof.cpu
+goos: linux
+goarch: amd64
+pkg: golang/series_3/src/go_tooling_in_action
+BenchmarkHandler-4        251787              4870 ns/op
+PASS
+ok      golang/series_3/src/go_tooling_in_action        1.413s
+```
+
+```bash
+go_tooling_in_action$ docker run --network=host -v $(pwd):/app -w /app uber/go-torch --binaryname go_tooling_in_action.test -b prof.cpu -f cpu_torch.svg
+INFO[10:40:17] Run pprof command: go tool pprof -raw go_tooling_in_action.test prof.cpu
+INFO[10:40:17] Writing svg to cpu_torch.svg
+
+```
+![cpu_torch](static/cpu_torch.svg)
+
+
+```bash
+go_tooling_in_action$ go tool pprof go_tooling_in_action.test prof.cpu 
+File: go_tooling_in_action.test
+Type: cpu
+Time: Nov 20, 2019 at 4:00pm (IST)
+Duration: 1.40s, Total samples = 1.44s (102.71%)
+Entering interactive mode (type "help" for commands, "o" for options)
+(pprof) list handler
+Total: 1.44s
+ROUTINE ======================== golang/series_3/src/go_tooling_in_action.handler in /home/tan/tanveer/golang/src/golang/series_3/src/go_tooling_in_action/main.go
+         0      860ms (flat, cum) 59.72% of Total
+         .          .     23:}
+         .          .     24:
+         .          .     25:func handler(w http.ResponseWriter, r *http.Request) {
+         .          .     26:   // re := regexp.MustCompile("^(.+)@golang.org$")
+         .          .     27:   path := r.URL.Path[1:]
+         .      450ms     28:   match := re.FindAllStringSubmatch(path, -1) // -1 means match all
+         .          .     29:
+         .          .     30:   if match != nil {
+         .      410ms     31:           fmt.Fprintf(w, "Hello, gopher %s\n", match[0][1])
+         .          .     32:           return
+         .          .     33:   }
+         .          .     34:
+         .          .     35:   fmt.Fprintln(w, "Hello, world !!!")
+         .          .     36:}
+(pprof) 
+```
