@@ -1,6 +1,7 @@
 module golang
 
 require (
+	github.com/adjust/go-wrk v0.0.0-20181206091710-be24f3cdfc30 // indirect
 	github.com/cosiner/argv v0.0.1 // indirect
 	github.com/go-delve/delve v1.3.2 // indirect
 	github.com/go-pg/pg v8.0.6+incompatible

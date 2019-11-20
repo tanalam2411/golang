@@ -320,3 +320,47 @@ ok  	golang/series_3/src/go_tooling_in_action	0.003s
 Press `ctrl+shift+p` then type `test coverage`
 
 ![golang test with coverage](static/golang_test_with_coverage.png)
+
+-----
+**Perf Profiles**
+
+- Load testing with `go-wrk`
+- Profiling with `pprof` - (`net/http/pprof`)
+- Tool used - `https://github.com/adjust/go-wrk`
+
+```bash
+go_tooling_in_action$ go get -u github.com/adjust/go-wrk
+
+go_tooling_in_action$ go-wrk -d 10 -c 10 -n 100000 -t 1000 http://localhost:8000/tan@golang.org
+==========================BENCHMARK==========================
+URL:				http://localhost:8000/tan@golang.org
+
+Used Connections:		10
+Used Threads:			1000
+Total number of calls:		100000
+
+===========================TIMINGS===========================
+Total time passed:		29.68s
+Avg time per request:		2.93ms
+Requests per second:		3369.57
+Median time per request:	2.15ms
+99th percentile time:		14.19ms
+Slowest time for request:	67.00ms
+
+=============================DATA=============================
+Total response body sizes:		1800000
+Avg response body per request:		18.00 Byte
+Transfer rate per second:		60652.27 Byte/s (0.06 MByte/s)
+==========================RESPONSES==========================
+20X Responses:		100000	(100.00%)
+30X Responses:		0	(0.00%)
+40X Responses:		0	(0.00%)
+50X Responses:		0	(0.00%)
+Errors:			0	(0.00%)
+```
+
+Importing `pprof` (`_ "net/http/pprof"`) - `https://golang.org/pkg/net/http/pprof/`
+
+- `pprof` is a tool for visualization and analysis of profiling data.
+
+![pprof_http_server.png](static/pprof_http_server.png)

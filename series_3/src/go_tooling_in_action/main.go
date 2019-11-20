@@ -6,7 +6,10 @@ import (
 	"log"
 	"net/http"
 	"regexp"
+	_ "net/http/pprof"
 )
+
+// _ is for ignoring unsed package pprof
 
 func main() {
 	http.HandleFunc("/", handler)
