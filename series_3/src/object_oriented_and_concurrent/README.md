@@ -239,3 +239,78 @@ type Conn interface {
     SetWriteDeadline(t time.Time) error
 }
 ```
+
+We want to test handleCon:
+```go
+func handleConn(conn net.Conn)
+```
+
+- We could create a fakeConn and define all the methods of Conn on it.
+
+- we can test handleCon with loopBack type:
+```go
+type loopBack struct {
+    net.Conn
+    buf bytes.Buffer    
+}
+```
+
+Any calls to the methods of `net.Conn` will fail, since the field is `nil`.
+
+We redefine the operations we support:
+
+```go
+func (c *loopBack) Read(b []byte) (int, error) {
+    return c.buf.Read(b)
+}
+```
+
+```go
+func (c *loopBack) Write(b []byte) (int, error) {
+    return c.buf.Write(b)
+}
+```
+
+---
+- [Book on Concurrency](http://www.r-5.org/files/books/computers/languages/sql/nosql/Paul_Butcher-Seven_Concurrency_Models_in_Seven_Weeks-EN.pdf)
+- [Callback](http://callbackhell.com/)
+---
+
+#### Go Concurrency
+- Is is part of the language, not a library.
+- Based on two concepts:
+  - goroutines: lightweight threads
+  - channels: typed pipes used to communicate and synchronize between goroutines. 
+
+Communicating through channels:
+`sleepAndTalk` sends the string into the channel instead of printing it.
+```go
+func sleepAndTalk(secs time.Duration, msg string, c chan string) {
+    time.Sleep(sec * time.Second)
+    c <- msg
+}
+```
+
+We create channel and pass it to `sleepAndTalk`, then wait for the values to be sent.
+- channels are pass by reference.
+```go
+func main() {
+    c := make(chan string)
+    
+    go sleepAndTalk(0, "Hello", c)
+    go sleepAndTalk(1, "Gophers!", c)
+    go sleepAndTalk(2, "What's", c)
+    go sleepAndTalk(3, "up?", c)
+
+    for i:=0; i < 4; i++ {
+        fmt.Printf("%v", <-c)
+    }
+}
+```
+
+`fmt.Printf("%v", <-c)`:
+  - When the `channel` is empty and if we try read, its will be blocking `<-c`.
+  - Same way if something is send over channel and there is no receiver on the other end, it will block. look buffered channel where you can define size of channel `c := make(chan string, 4)`.
+  - So by default channels are synchronous.
+  
+

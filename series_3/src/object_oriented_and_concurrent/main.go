@@ -4,6 +4,8 @@ import (
 	"bytes"
 	"fmt"
 	"io"
+	"net/http"
+	"sort"
 )
 
 type Person struct { Name string }
@@ -29,6 +31,11 @@ func (w *WriteCounter) Write(b []byte) (int ,error) {
 	return w.ReadWriter.Write(b)
 }
 
+var nextId = make(chan int)
+
+func handler(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "<h1>You got %v</h1>", <-nextId)
+}
 
 func main() {
 	var e Employee
@@ -43,5 +50,30 @@ func main() {
 
 	fmt.Fprintf(w, "Hello, gophers!\n")
 	fmt.Printf("Printed %v bytes", w.count)
+
+	// func literals and lambdas
+	people := []string{"Alice", "Bob", "Dave"}
+	less := func(i, j int) bool {
+		return len(people[i]) < len(people[j])
+	}
+	sort.Slice(people, less)
+	sort.Ints([]int{1, 2, 3})
+	fmt.Println(people)
+
+	people = nil
+	fmt.Printf("%v:%T:%v", people, people, people)
+
+	// ---
+
+	http.HandleFunc("/next", handler)
+	go func() {
+		for i:=0; ; i++ {
+			nextId <- i
+		}
+	}()
+
+	fmt.Println("serving at: http://localhost:8000/next")
+	http.ListenAndServe("localhost:8000", nil)
+
 }
 
