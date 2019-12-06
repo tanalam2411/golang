@@ -314,3 +314,99 @@ func main() {
   - So by default channels are synchronous.
   
 
+---
+
+Let's count on the web
+
+We receive the next id from a channel:
+
+```go
+var nextID = make(chan int)
+
+func handler(w http.ResponseWritter, r *http.Request) {
+    fmt.Fprintf(w, "<h1>You got: %v</h1>", <-nextID)
+}
+
+// We need a goroutine sending ids into the channel
+
+func main() {
+    http.HandleFunc("/next", handler)
+    
+    go func() {
+        for i := 0; ; i++ {
+            nextID <- i
+        }   
+    }()
+    
+    http.ListenAndServer("localhost:8000", nil)
+}
+```
+
+http://localhost:8000/next
+
+
+Here `nextID <- i` will be blocked until next http call is triggered.
+
+---
+
+Let's fight
+
+`select` allows us to chose among multiple channel operations:
+
+```go
+var battle = make(chan string)
+
+func fightHandler(w http.ResponseWriter, r *http.Request) {
+	select {
+		case battle <- r.FormValue("usr"):
+			fmt.Fprintf(w, "You won")
+		case won := <-battle:
+			fmt.Fprintf(w, "You lost, %v is better than you.", won)
+	}
+}
+
+```
+Go - http://localhost:8000/fight?usr=go
+
+Java - http://localhost:8000/fight?usr=java
+
+--- 
+##### Chain of gophers
+
+```go
+
+package main
+
+import (
+	"fmt"
+	"time"
+)
+
+func f(left, right chan int) {
+	left <- 1 + <-right
+}
+
+func main() {
+	start := time.Now()
+	const n = 100000
+	leftmost := make(chan int)
+
+	right := leftmost
+	left := leftmost
+
+	for i :=0; i < n; i++ {
+		right = make(chan int)
+		go f(left, right)
+		left = right
+	}
+
+	go func(c chan int) { c <- 0 }(right)
+
+	fmt.Println(<-leftmost, time.Since(start))
+}
+
+```
+
+
+---
+ref - https://www.youtube.com/watch?v=Ng8m5VXsn8Q

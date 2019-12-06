@@ -37,7 +37,18 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "<h1>You got %v</h1>", <-nextId)
 }
 
-func main() {
+var battle = make(chan string)
+
+func fightHandler(w http.ResponseWriter, r *http.Request) {
+	select {
+		case battle <- r.FormValue("usr"):
+			fmt.Fprintf(w, "You won")
+		case won := <-battle:
+			fmt.Fprintf(w, "You lost, %v is better than you.", won)
+	}
+}
+
+func main1() {
 	var e Employee
 	e.Name = "Person One"
 	e.EmployeeID = 123
@@ -66,6 +77,7 @@ func main() {
 	// ---
 
 	http.HandleFunc("/next", handler)
+	http.HandleFunc("/fight", fightHandler)
 	go func() {
 		for i:=0; ; i++ {
 			nextId <- i
