@@ -1,7 +1,6 @@
 package contextimpl
 
 import (
-	"context"
 	"fmt"
 	"math"
 	"testing"
@@ -89,7 +88,6 @@ func TestWithDeadline(t *testing.T) {
 	}
 }
 
-
 func TestWithTimeout(t *testing.T) {
 	timeout := 2 * time.Second
 	deadline := time.Now().Add(timeout)
@@ -114,5 +112,40 @@ func TestWithTimeout(t *testing.T) {
 
 	if err := ctx.Err(); err != DeadlineExceeded {
 		t.Errorf("error should be DeadlineExceeded, got %v", err)
+	}
+}
+
+func TestWithValue(t *testing.T) {
+	tc := []struct {
+		key, val, keyRet, valRet interface{}
+		shouldPanic              bool
+	}{
+		{"a", "b", "a", "b", false},
+		{"a", "b", "c", nil, false},
+		{42, true, 42, true, false},
+		{42, true, int64(42), nil, false},
+		{nil, true, nil, nil, true},
+		{[]int{1, 2, 3}, true, []int{1, 2, 3}, nil, true},
+	}
+
+	for _, tt := range tc {
+		var panicked interface{}
+		func() {
+			defer func() { panicked = recover() }()
+
+			ctx := WithValue(Background(), tt.key, tt.val)
+			if val := ctx.Value(tt.keyRet); val != tt.valRet {
+				t.Errorf("expected value %v, got %v", tt.valRet, val)
+			}
+		}()
+
+		if panicked != nil && !tt.shouldPanic {
+			t.Errorf("unexpected panic: %v", panicked)
+		}
+
+		if panicked == nil && tt.shouldPanic {
+			t.Errorf("expected panic, but didn't get it")
+		}
+
 	}
 }

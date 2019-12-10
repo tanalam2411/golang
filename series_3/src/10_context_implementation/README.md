@@ -60,7 +60,7 @@ and
 		close(ctx.done)
 	}
 ```
-
+![goconvery](static/goconvery.png)
 ---
 Go testing in the browser. Integrates with `go test`. Write behavioral tests in Go [goconvey](https://github.com/smartystreets/goconvey)
 ```bash

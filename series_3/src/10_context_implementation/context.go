@@ -2,6 +2,7 @@ package contextimpl
 
 import (
 	"errors"
+	"reflect"
 	"sync"
 	"time"
 )
@@ -102,11 +103,49 @@ func WithDeadline(parent Context, deadline time.Time) (Context, CancelFunc) {
 		deadline:  deadline,
 	}
 
-	time.AfterFunc(time.Until(deadline), func() {
+	t := time.AfterFunc(time.Until(deadline), func() {
 		ctx.cancel(DeadlineExceeded)
 	})
 
-	return ctx, cancel
+	stop := func() {
+		t.Stop()
+		cancel()
+	}
+
+	return ctx, stop
+}
+
+func WithTimeout(parent Context, timeout time.Duration) (Context, CancelFunc) {
+	return WithDeadline(parent, time.Now().Add(timeout))
+}
+
+type valueCtx struct {
+	Context
+	value, key interface{}
+}
+
+func (ctx *valueCtx) Value(key interface{}) interface{} {
+	if key == ctx.key {
+		return ctx.value
+	}
+	return ctx.Context.Value(key)
+}
+
+func WithValue(parent Context, key, value interface{}) Context {
+
+	if key == nil {
+		panic("key is nil")
+	}
+
+	if !reflect.TypeOf(key).Comparable() {
+		panic("key is not comparable")
+	}
+
+	return &valueCtx{
+		Context: parent,
+		key:     key,
+		value:   value,
+	}
 }
 
 // In go pointer pointing to empty type are same, so &emptyCtx{} is equal to &emptyCtx{}
