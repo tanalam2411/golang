@@ -27,6 +27,7 @@ func (e *Employee)newEmployee(firstName, lastName string, salary int, fullTime b
 	e.fullTime = fullTime
 }
 
+
 func main() {
 	var ross Employee   // Just defines variable ross but doesn't initializes it.
 	fmt.Println(ross)
@@ -42,5 +43,42 @@ func main() {
 	}
 	// james := Employee{"James", "Bing", 10000, false} // Values should be provided in order when field names are not provided
 	james.Print()
+
+	anonymousStruct()
+
+	pointerToStruct()
 }
 
+
+func anonymousStruct() {
+	fmt.Println("----------- anonymous struct ----------------")
+	monica := struct{
+		firstName, lastName string
+		salary 				int
+		fullTime			bool
+	}{
+		firstName: "Monica",
+		lastName:  "Geller",
+		salary:		1200,
+	}
+
+	fmt.Println(monica)
+	fmt.Printf("%T\n", monica)
+}
+
+
+func pointerToStruct() {
+	fmt.Println("----------- pointer to struct ----------------")
+	ross := &Employee{
+		firstName: "Ross",
+		lastName:  "Bing",
+		salary:    7000,
+		fullTime:  true,
+	}
+
+	fmt.Println("firstName: ", (*ross).firstName)
+	fmt.Println("firstName: ", ross.firstName)
+
+	fmt.Printf("Type of ross %T\n", ross)
+	fmt.Printf("Type of ross %T\n", *ross)
+}

@@ -80,9 +80,44 @@ Fulltime:  false
 ##### Anonymous struct or Inline struct
 - Anonymous struct is a struct with no explicitly defined struct type alias.
 
+```go
+	monica := struct{
+		firstName, lastName string
+		salary 				int
+		fullTime			bool
+	}{
+		firstName: "Monica",
+		lastName:  "Geller",
+		salary:		1200,
+	}
 
+        fmt.Printf("%T\n", monica)
+```
 
+-----
 
+##### Pointer to struct
+
+- Creating `pointer` that points to the value of a struct.
+```go
+	ross := &Employee{
+		firstName: "Ross",
+		lastName:  "Bing",
+		salary:    7000,
+		fullTime:  true,
+	}
+
+	fmt.Println("firstName: ", (*ross).firstName)
+	fmt.Println("firstName: ", ross.firstName)
+```
+- `*ross` - is a `dereferencing syntax` to get the actual value of the struct it is pointing to.
+- `(*ross)` - parenthesis around the pointer is used so that compiler doesn't get confused between `(*ross).firstName` vs `*(ross.firstName)` -> when using `*ross.firstName` syntax.
+- `Go` provides dereferncing by default, so we don't need to explicitly using `*` to derefer a pointer. Just `ross.firstName` would work.
+
+-----
+##### Anonymous fields
+
+  
 
 
 
