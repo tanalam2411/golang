@@ -2,12 +2,26 @@ package main
 
 import "fmt"
 
+
+type InsuranceDetails struct {
+	policyName 		string
+	totalMembers  	int
+}
+
+
+type Department struct {
+	name	string
+	code	string
+}
+
 type Employee struct {
 	// firstName, lastName	string		// is also a valid syntax
 	firstName	string
 	lastName	string
 	salary		int
 	fullTime	bool
+	department	Department
+	InsuranceDetails
 }
 
 
@@ -18,6 +32,10 @@ func (e *Employee)Print() {
 	fmt.Println("LastName: ", e.lastName)
 	fmt.Println("Salary: ", e.salary)
 	fmt.Println("Fulltime: ", e.fullTime)
+	fmt.Println("Department name: ", e.department.name)
+	fmt.Println("Department code: ", e.department.code) 	// e.code won't work
+	fmt.Println("PolicyName: ", e.InsuranceDetails.policyName)
+	fmt.Println("TotalMembers: ", e.totalMembers)
 }
 
 func (e *Employee)newEmployee(firstName, lastName string, salary int, fullTime bool) {
@@ -47,6 +65,12 @@ func main() {
 	anonymousStruct()
 
 	pointerToStruct()
+
+	anonymousFields()
+
+	nestedStruct()
+
+	promotedFields()
 }
 
 
@@ -81,4 +105,49 @@ func pointerToStruct() {
 
 	fmt.Printf("Type of ross %T\n", ross)
 	fmt.Printf("Type of ross %T\n", *ross)
+}
+
+
+type Data struct {
+	string
+	int
+	bool
+}
+
+
+func anonymousFields() {
+	fmt.Println("----------- anonymous fields in struct----------------")
+	d := Data{"ABC", 1000, true}
+	fmt.Println(d.string, d.int, d.bool)
+}
+
+
+func nestedStruct() {
+	fmt.Println("----------- nested struct----------------")
+	e := Employee{
+		firstName: "Ross",
+		lastName:  "Gailer",
+		salary:    11000,
+		fullTime:  false,
+		department: Department{"IT", "IT-001"},
+	}
+
+	e.Print()
+
+}
+
+
+func promotedFields() {
+	fmt.Println("----------- promoted fields nested struct----------------")
+	e := Employee{
+		firstName:        "Ross",
+		lastName:         "Geller",
+		salary:           1000,
+		fullTime:         false,
+		department:       Department{"Sales", "Sales-002"},
+		InsuranceDetails: InsuranceDetails{"Health", 3},
+	}
+
+	e.Print()
+	fmt.Println(" Ross: ", e)
 }

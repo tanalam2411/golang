@@ -117,6 +117,79 @@ Fulltime:  false
 -----
 ##### Anonymous fields
 
+- One can define a struct type without declaring any field names. 
+```go
+type Data struct {
+	string
+	int
+	bool
+}
+
+type Employee struct {
+    firstName, lastName string
+    salary              int
+    bool                // anonymous field
+}
+```
+- Go will use the data type declarations(keywords) as the field names.
+
+-----
+
+##### Nested struct
+
+- A struct field can jhave a data type that is a `struct` type, called nested struct.
+```go
+type Department struct {
+	name	string
+	code	string
+}
+
+type Employee struct {
+	// firstName, lastName	string		// is also a valid syntax
+	firstName	string
+	lastName	string
+	salary		int
+	fullTime	bool
+	department	Department
+}
+```        
+
+-----
+
+##### Promoted fields
+
+- Nesting struct without providing field name. `InsuranceDetails` 
+
+```go
+type InsuranceDetails struct {
+	policyName 		string
+	totalMembers  	int
+}
+
+type Employee struct {
+	// firstName, lastName	string		// is also a valid syntax
+	firstName	string
+	lastName	string
+	salary		int
+	fullTime	bool
+	department	Department
+	InsuranceDetails
+}
+```   
+
+- All fields of Anonymous nested struct `InsuranceDetails` (not Department) gets promoted to parent struct `Employee` and fields can be accessed as it they were defined on the `Employee` struct.
+- will work
+    ```go
+    e.totalMembers
+    ```
+- will not work
+    ```go
+    e.code // e.department.code // will work
+    ```  
+  
+- Notes: If a nested anonymous struct has a same field(field name) that conflicts with field name defined in the parent struct, then that field won't get promoted. Only the `non-conflicting` field will get promoted.  
+
+
   
 
 
