@@ -38,6 +38,11 @@ func (e *Employee)Print() {
 	fmt.Println("TotalMembers: ", e.totalMembers)
 }
 
+
+func (d *Department)Print() {
+
+}
+
 func (e *Employee)newEmployee(firstName, lastName string, salary int, fullTime bool) {
 	e.firstName = firstName
 	e.lastName = lastName
@@ -151,3 +156,75 @@ func promotedFields() {
 	e.Print()
 	fmt.Println(" Ross: ", e)
 }
+
+
+
+
+
+/*
+{  0 false { } { 0}}
+
+----------------- Employee:   ----------------
+FirstName:
+LastName:
+Salary:  0
+Fulltime:  false
+Department name:
+Department code:
+PolicyName:
+TotalMembers:  0
+
+----------------- Employee: Ross Tailor ----------------
+FirstName:  Ross
+LastName:  Tailor
+Salary:  5000
+Fulltime:  true
+Department name:
+Department code:
+PolicyName:
+TotalMembers:  0
+
+----------------- Employee: James Bing ----------------
+FirstName:  James
+LastName:  Bing
+Salary:  10000
+Fulltime:  false
+Department name:
+Department code:
+PolicyName:
+TotalMembers:  0
+----------- anonymous struct ----------------
+{Monica Geller 1200 false}
+struct { firstName string; lastName string; salary int; fullTime bool }
+----------- pointer to struct ----------------
+firstName:  Ross
+firstName:  Ross
+Type of ross *main.Employee
+Type of ross main.Employee
+----------- anonymous fields in struct----------------
+ABC 1000 true
+----------- nested struct----------------
+
+----------------- Employee: Ross Gailer ----------------
+FirstName:  Ross
+LastName:  Gailer
+Salary:  11000
+Fulltime:  false
+Department name:  IT
+Department code:  IT-001
+PolicyName:
+TotalMembers:  0
+----------- promoted fields nested struct----------------
+
+----------------- Employee: Ross Geller ----------------
+FirstName:  Ross
+LastName:  Geller
+Salary:  1000
+Fulltime:  false
+Department name:  Sales
+Department code:  Sales-002
+PolicyName:  Health
+TotalMembers:  3
+ Ross:  {Ross Geller 1000 false {Sales Sales-002} {Health 3}}
+
+*/

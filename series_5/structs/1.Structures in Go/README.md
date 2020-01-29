@@ -189,7 +189,11 @@ type Employee struct {
   
 - Notes: If a nested anonymous struct has a same field(field name) that conflicts with field name defined in the parent struct, then that field won't get promoted. Only the `non-conflicting` field will get promoted.  
 
+-----
+##### Nested interface
 
+- Like a struct, an interface can also be nested in a struct means a field can have a `data type of a type interface`.
+- Any data type that implements an interface can also be represented as a type of the interface(polymorphism)
   
 
 
