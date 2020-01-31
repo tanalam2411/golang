@@ -1,5 +1,5 @@
 
-1. [Structures in Go (structs)](1.Structures in Go/README.md)
+1. [Structures in Go (structs)](1.Structures_in_Go/README.md)
 
 
 -----

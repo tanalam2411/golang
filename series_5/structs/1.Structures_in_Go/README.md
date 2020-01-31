@@ -194,6 +194,107 @@ type Employee struct {
 
 - Like a struct, an interface can also be nested in a struct means a field can have a `data type of a type interface`.
 - Any data type that implements an interface can also be represented as a type of the interface(polymorphism)
+- Using this `polimorphism` principle, we can have a struct field of an interface type.
+  - Value of this field can be anything that implements that interface.
+  
+```go
+type Salaried interface {
+	getSalary() int
+}
+
+
+type Salary struct {
+	basic		int
+	insurance 	int
+	allowance 	int
+}
+
+
+func(s Salary)getSalary() int {
+	return s.basic + s.insurance + s.allowance
+}
+
+type Employee1 struct {
+	firstName, lastName string
+	salary				Salaried  // interface type
+}
+
+```  
+ 
+- Since `Salary` struct implements `getSalary()` method, means it implements `Salaried` interface.
+- Hence, we can store an instance of `Salary` struct type in a field of `Salaried` type. -> `salary				Salaried`
+- **Note:** If no value is assigned to the `salary` field while creating an `Employee` struct, the Go will panic with a runtime error as we are trying to call a method on a `nil` value which is the default dynamic value of an interface.
+
+```go
+	ross := Employee1{
+		firstName: "Ross",
+		lastName:  "Geller",
+	}
+
+	fmt.Println("Ross's salary is: ", ross.salary.getSalary())
+``` 
+
+```bash
+$ go run nested_interface.go 
+panic: runtime error: invalid memory address or nil pointer dereference
+[signal SIGSEGV: segmentation violation code=0x1 addr=0x0 pc=0x48cf18]
+
+goroutine 1 [running]:
+main.main()
+        /home/tan/tanveer/golang/src/golang/series_5/structs/1.Structures in Go/nested_interface.go:48 +0x78
+exit status 2
+
+```
+
+
+- **`Anonymously nested interface`**: Similar to the field `promotions`, `methods` are also `promoted` when a struct field is an `anonymous interface`.  `ross.getSalary()`
+```go
+type Employee1 struct {
+	firstName, lastName string
+	Salaried
+}
+
+func main() {
+	ross := Employee1{
+		firstName: "Ross",
+		lastName:  "Geller",
+		Salaried:    Salary{1000, 50, 50},
+		
+	}
+
+	fmt.Println("Ross's salary is: ", ross.getSalary())
+}
+```
+
+- Here, we have removed the `salary` field from the `Employee` struct type and now `Salaried` is both the field name and field data type. 
+- This will promote all the methods from `Salaried` interface on the parent struct `Employee` as if the `Employee` struct type implements those methods.
+- **Note:** Similar to the field promotions of an anonymously nested struct, only the non-conflicting methods will get promoted.
+  - Hence, if the `Employee` struct type also implements the `getSalary` method, then that will be used instead.
+
+```go
+func (e Employee1)getSalary() int {
+	return 0
+}
+
+func main() {
+	ross := Employee1{
+		firstName: "Ross",
+		lastName:  "Geller",
+		//salary:    Salary{1000, 50, 50},
+		Salaried:    Salary{1000, 50, 50},
+
+	}
+
+	//fmt.Println("Ross's salary is: ", ross.salary.getSalary()) // salary:    Salary{1000, 50, 50},
+	fmt.Println("Ross's salary is: ", ross.getSalary())
+	fmt.Println("Ross's salary is: ", ross.Salaried.getSalary())
+}
+```  
+
+```bash
+Ross's salary is:  0
+Ross's salary is:  1100
+```
   
 
 
@@ -224,4 +325,4 @@ type Employee struct {
 
 
 -----
-[Ref](https://medium.com/rungo/structures-in-go-76377cc1)
+[Ref](https://medium.com/rungo/structures-in-go-76377cc106a2)
