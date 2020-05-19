@@ -15,6 +15,7 @@ require (
 	github.com/konsorten/go-windows-terminal-sequences v1.0.2 // indirect
 	github.com/kyokomi/emoji v2.1.0+incompatible
 	github.com/lib/pq v1.2.0
+	github.com/mactsouk/go v0.0.0-20180603081621-6a282087f7bd // indirect
 	github.com/mattn/go-colorable v0.1.4 // indirect
 	github.com/mattn/go-isatty v0.0.10 // indirect
 	github.com/mattn/go-runewidth v0.0.6 // indirect
