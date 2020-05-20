@@ -99,3 +99,5 @@ $ sudo rm -rf ~/go/pkg/mod/github.com/mactsouk/go@v0.0.0-20180603081621-6a282087
 ```
 
 ---
+
+- [Unix stdin, stdout, and stderr](./1.unix_stdin_stdout_stderr.md)
