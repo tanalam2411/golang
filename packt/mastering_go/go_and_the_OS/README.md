@@ -101,3 +101,27 @@ $ sudo rm -rf ~/go/pkg/mod/github.com/mactsouk/go@v0.0.0-20180603081621-6a282087
 ---
 
 - [Unix stdin, stdout, and stderr](./1.unix_stdin_stdout_stderr.md)
+
+---
+
+- ##### fmt
+
+- `Print*` - prints to stdout
+- `Sprint*` - returns formatted string
+- `Fprint*` - write to files using `io.Writer`
+
+---
+
+##### := and =
+
+In case of `:=` there should be atleast one new variable on the left side.
+
+```go
+i, k := 1, 2
+j, k := 3, 4
+```
+
+---
+
+##### Reading from standard file
+- [stdin.go](./stdin.go)
