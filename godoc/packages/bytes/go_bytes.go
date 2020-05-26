@@ -12,6 +12,7 @@ func main() {
 	compareStrings("abc", "bc")
 	containsAny([]byte("abc"), []byte("cb"))
 	hasPrefixByte([]byte("Golang"), []byte("Go"))
+	joinBytes([]byte("Golang"), []byte("Go"))
 }
 
 
@@ -42,4 +43,14 @@ func containsAny(b1, b2 []byte) {
 func hasPrefixByte(b1, b2 []byte) {
 	res := bytes.HasPrefix(b1, b2)
 	fmt.Printf("hasPrefixByte: %v, %v: %v\n", b1, b2, res)
+}
+
+
+func joinBytes(b1 []byte, b2 []byte) {
+	var resB [][]byte
+	resB = append(resB, b1)
+	resB = append(resB, b2)
+	res := bytes.Join(resB, []byte(" = "))
+	fmt.Printf("joinBytes: %v, %v, %v: %v, %s\n", b1, b2, resB, res, res)
+
 }
