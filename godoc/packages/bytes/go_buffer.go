@@ -25,6 +25,18 @@ func readerExample() {
 	// A Buffer can turn a string or a []byte into an io.Reader.
 	buf := bytes.NewBufferString("AbCdEfGh==")  // returns &Buffer{buf: []byte(s)}
 	dec := base64.NewDecoder(base64.StdEncoding, buf)
-	fmt.Printf("%", dec)
-	io.Copy(os.Stdout, buf)
+	//fmt.Printf("%s", dec)
+	io.Copy(os.Stdout, dec)
+}
+
+
+func newBufferExample() {
+	_b := make([]byte, 0, 1)
+	buf := bytes.NewBuffer(_b)
+	buf.Write([]byte("abc"))
+	buf.Write([]byte{97, 98, 99})
+	buf.WriteString()
+
+
+
 }
