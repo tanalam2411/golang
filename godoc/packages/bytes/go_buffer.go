@@ -11,6 +11,8 @@ import (
 func main() {
 	exampleOne()
 	readerExample()
+
+	fmt.Println("--------newBufferExample----------")
 	newBufferExample()
 }
 
@@ -37,5 +39,7 @@ func newBufferExample() {
 	buf.Write([]byte("abc"))
 	buf.Write([]byte{97, 98, 99})
 	buf.WriteString("\nnewBufferExample: Hello, world\n")
-	buf.WriteTo(os.Stdout)
+	buf.Next(10)
+	//buf.WriteTo(os.Stdout)
+
 }
