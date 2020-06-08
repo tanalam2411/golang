@@ -36,10 +36,12 @@ func readerExample() {
 func newBufferExample() {
 	_b := make([]byte, 0, 1)
 	buf := bytes.NewBuffer(_b)
-	buf.Write([]byte("abc"))
-	buf.Write([]byte{97, 98, 99})
+	//buf.Write([]byte("abc"))
+	//buf.Write([]byte{97, 98, 99})
 	buf.WriteString("\nnewBufferExample: Hello, world\n")
-	buf.Next(10)
+	bs := buf.Next(10)
 	//buf.WriteTo(os.Stdout)
-
+	fmt.Println(string(bs))
+	r, _ , _:= buf.ReadRune()
+	fmt.Println(string(r))
 }
