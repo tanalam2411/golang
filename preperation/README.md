@@ -2,6 +2,7 @@
 
 ---
 
+1. [Types](./1.Types/README.md)
 
 
 
