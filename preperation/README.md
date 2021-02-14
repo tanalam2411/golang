@@ -1,8 +1,11 @@
 #### Golang Preparation
 
+
+- Golang is a strongly typed and garbage-collected and has explicit support for concurrent programming.
+
 ---
 
-1. [Types](./1.Types/README.md)
+1. [Types](4.Types/README.md)
 
 
 
