@@ -36,6 +36,9 @@
                   
             ```      
   - Rune literals: One or more characters enclosed in single quotes, as in 'x' or '\n'
+  - String literals: concatenating a sequence of characters.
+    - Raw string literals: sequence of chars between ` `` `, any character may appear except back quote "`"   
+    - Interpreted string literals: sequence of chars between `" "`
 - White space, horizontal tabs, carriage returns, new lines is ignored.
 - Newline or EOF may trigger the insertion of a semicolon.
 - ";" is used as a terminator.
