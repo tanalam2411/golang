@@ -16,7 +16,6 @@ func main() {
 	}
 }
 
-
 func handler() http.Handler {
 	r := http.NewServeMux()
 	r.HandleFunc("/double", doubleHandler)

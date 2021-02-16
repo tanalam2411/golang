@@ -20,7 +20,6 @@ func main() {
 	createNewOfSlice()
 }
 
-
 func createNewOfSlice() {
 
 	i := new([]int)

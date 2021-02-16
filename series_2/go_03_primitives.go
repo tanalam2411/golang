@@ -88,7 +88,7 @@ func main() {
 
 	f1 := 3.14   // var f1 float32 = 3.14, f1 := 3.14 will assign type float64 as default
 	f1 = 13.7e72 //13.7*10^72
-	f1 = 2.1E14
+	f1 = 2.1e14
 	fmt.Printf("%v, %T \n", f1, f1)
 
 	fmt.Println("**************** COMPLEX ********************")

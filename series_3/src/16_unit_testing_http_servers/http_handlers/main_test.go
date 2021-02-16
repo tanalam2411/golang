@@ -13,20 +13,19 @@ import (
 func TestDoubleHandler(t *testing.T) {
 	// tt - is a table of tests, TDD table oriented testing
 	tt := []struct {
-		name string
-		value string
+		name   string
+		value  string
 		double int
-		err string
+		err    string
 	}{
 		{name: "double of two", value: "2", double: 4},
 		{name: "missing value", value: "", err: "missing value"},
 		{name: "not a number", value: "x", err: "not a number: x"},
 	}
 
-
 	for _, tc := range tt {
 
-		t.Run(tc.name, func(t *testing.T){
+		t.Run(tc.name, func(t *testing.T) {
 
 			req, err := http.NewRequest("GET", "localhost:8000/double?v="+tc.value, nil)
 			if err != nil {
@@ -75,7 +74,6 @@ func TestDoubleHandler(t *testing.T) {
 	}
 
 }
-
 
 // Testing http routing
 func TestRouting(t *testing.T) {

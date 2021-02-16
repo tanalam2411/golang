@@ -24,20 +24,18 @@ func main() {
 	//time.AfterFunc(time.Second, cancel)
 
 	/*
-	ctx := context.Background()
-	ctx, cancel := context.WithTimeout(ctx, time.Second)
+		ctx := context.Background()
+		ctx, cancel := context.WithTimeout(ctx, time.Second)
 
-	// cancel must be called at the end because context package will allocate some resources for timers,
-	// and with defer cancel() those timer will be released.
-	defer cancel()
+		// cancel must be called at the end because context package will allocate some resources for timers,
+		// and with defer cancel() those timer will be released.
+		defer cancel()
 
-	 */
-
+	*/
 
 	sleepAndTalk(ctx, 5*time.Second, "Hello")
 
 }
-
 
 func sleepAndTalk(ctx context.Context, d time.Duration, msg string) {
 	select {

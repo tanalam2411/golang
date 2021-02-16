@@ -6,11 +6,10 @@ import (
 	"os"
 )
 
-
 type SSHCommand struct {
-	Path string
-	Env []string
-	Stdin io.Reader
+	Path   string
+	Env    []string
+	Stdin  io.Reader
 	Stdout io.Writer
 	Stderr io.Writer
 }

@@ -30,13 +30,12 @@ func main() {
 
 	startTime := time.Now()
 
-	credentials := map[string] string {}
+	credentials := map[string]string{}
 	credentials["a"] = "b"
 	credentials["c"] = "d"
 	credentials["e"] = "f"
 	credentials["g"] = "h"
 	credentials["root"] = "FixStream"
-
 
 	_ = os.Mkdir(outDir, os.ModePerm)
 	//commands := []string{"hostname", `ifconfig eth0 | head -2 | tail -1 | tr -s " " " " | cut -d ":" -f2 | cut -d " " -f1`,
@@ -101,14 +100,12 @@ func inc(ip net.IP) {
 	}
 }
 
-
-
 func haha(ip string) {
 	count += 1
 	fmt.Println("hahahahaha: ", ip, count, totalIps)
 }
 
-func sshExecutor(ip, username, password string, commands []string, credentials map[string] string) error {
+func sshExecutor(ip, username, password string, commands []string, credentials map[string]string) error {
 
 	defer wg.Done()
 	defer haha(ip)
@@ -132,7 +129,6 @@ func sshExecutor(ip, username, password string, commands []string, credentials m
 			return err
 		}
 
-
 	}
 
 	//client, err := authenticate(ip, username, password)
@@ -141,7 +137,6 @@ func sshExecutor(ip, username, password string, commands []string, credentials m
 	//	//wg.Done()
 	//	return err
 	//}
-
 
 	defer client.Close()
 
@@ -154,14 +149,12 @@ func sshExecutor(ip, username, password string, commands []string, credentials m
 	}
 	defer session.Close()
 
-
 	stdin, err := session.StdinPipe()
 	if err != nil {
 		log.Println(err)
 		//wg.Done()
 		return err
 	}
-
 
 	outputFilePath := filepath.Join(outDir, fmt.Sprintf("%v_output_1.txt", ip))
 

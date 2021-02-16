@@ -6,7 +6,6 @@ import (
 	"strings"
 )
 
-
 func main() {
 	compareBytes([]byte("abc"), []byte("bc"))
 	compareStrings("abc", "bc")
@@ -14,7 +13,6 @@ func main() {
 	hasPrefixByte([]byte("Golang"), []byte("Go"))
 	joinBytes([]byte("Golang"), []byte("Go"))
 }
-
 
 func compareBytes(b1, b2 []byte) {
 
@@ -27,24 +25,20 @@ func compareBytes(b1, b2 []byte) {
 	fmt.Printf("b3: %v\n", b3)
 }
 
-
 func compareStrings(s1, s2 string) {
 	res := strings.Contains(s1, s2)
 	fmt.Printf("comapreBytes: %v - %v: %v\n", s1, s2, res)
 }
-
 
 func containsAny(b1, b2 []byte) {
 	res := bytes.Contains(b1, b2)
 	fmt.Printf("containsBytes: %v, %v: %v\n", b1, b2, res)
 }
 
-
 func hasPrefixByte(b1, b2 []byte) {
 	res := bytes.HasPrefix(b1, b2)
 	fmt.Printf("hasPrefixByte: %v, %v: %v\n", b1, b2, res)
 }
-
 
 func joinBytes(b1 []byte, b2 []byte) {
 	var resB [][]byte

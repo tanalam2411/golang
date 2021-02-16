@@ -9,7 +9,7 @@ import (
 
 func TestHandler(t *testing.T) {
 	// tdd - table driven test
-	cases := []struct{
+	cases := []struct {
 		in, out string
 	}{
 		{"tan@golang.org", "gopher tan"},
@@ -17,33 +17,32 @@ func TestHandler(t *testing.T) {
 	}
 
 	for _, c := range cases {
-	req, err := http.NewRequest(
-		http.MethodGet,
-		"http://localhost:8080/"+c.in,
-		nil,
-	)
+		req, err := http.NewRequest(
+			http.MethodGet,
+			"http://localhost:8080/"+c.in,
+			nil,
+		)
 
-	if err != nil {
-		t.Fatalf("Could not create request: %v", err)
-	}
+		if err != nil {
+			t.Fatalf("Could not create request: %v", err)
+		}
 
-	// mock response writer
-	rec := httptest.NewRecorder()
-	handler(rec, req)
+		// mock response writer
+		rec := httptest.NewRecorder()
+		handler(rec, req)
 
-	if rec.Code != http.StatusOK {
-		t.Errorf("Expected status 200; got %d", rec.Code)
-	}
+		if rec.Code != http.StatusOK {
+			t.Errorf("Expected status 200; got %d", rec.Code)
+		}
 
-	if !strings.Contains(rec.Body.String(), c.out) {
-		t.Errorf("Unexpected body in response: %q", rec.Body.String())
+		if !strings.Contains(rec.Body.String(), c.out) {
+			t.Errorf("Unexpected body in response: %q", rec.Body.String())
+		}
 	}
 }
-}
-
 
 func BenchmarkHandler(b *testing.B) {
-	for i:=0; i<b.N; i++ {
+	for i := 0; i < b.N; i++ {
 		req, err := http.NewRequest(
 			http.MethodGet,
 			"http://localhost:8000/tan@golang.org",

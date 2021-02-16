@@ -11,43 +11,39 @@ Different ways to declare an array.
 2. var x[sizeOfArray]<type>
 3. var x = [...]<type>{}
 4. x := [sizeOfArray]<type>{}
- */
+*/
 
 func main() {
 	fmt.Println("--------- Arrays Introduction ------------")
 
 	// Declaring an array
-	var i[10]int
+	var i [10]int
 	fmt.Printf("i value: %v, type: %T\n", i, i)
 	fmt.Printf("i Type:%v ", reflect.ValueOf(i).Kind())
 
-	var f[10]float32
+	var f [10]float32
 	fmt.Printf("f value: %v, type: %T\n", f, f)
 
-	var s[10]string
+	var s [10]string
 	fmt.Printf("s value: %v, type: %T\n", s, s)
 
-	var b[10]byte
+	var b [10]byte
 	fmt.Printf("b value: %v, type: %T\n", b, b)
 
-	var r[10]rune
+	var r [10]rune
 	fmt.Printf("r value: %v, type: %T\n", r, r)
-
 
 	// Initializing an array using an array literal
 	var ii = [10]int{1, 2, 3}
 	fmt.Printf("ii value: %v, type: %T\n", ii, ii)
 
-
 	// short hand declaration
 	iii := [5]int{4, 5, 6}
 	fmt.Printf("iii value: %v, type: %T\n", iii, iii)
 
-
 	// Letting go compiler infer the length of the array
 	iiii := [...]int{7, 8, 9, 10}
 	fmt.Printf("iiii value: %v, type: %T, len: %v\n", iiii, iiii, len(iiii))
-
 
 	// Arrays are value type, so assigning an array variable to another will make copy of it, not reference.
 	jjjj := iiii
@@ -66,7 +62,7 @@ func main() {
 	fmt.Println("---------- Iterating over array -----------")
 
 	// Iterating over an array
-	for i:=0; i < len(iiii); i++ {
+	for i := 0; i < len(iiii); i++ {
 		fmt.Printf("iiii: %v\n", iiii[i])
 	}
 
@@ -91,7 +87,7 @@ func main() {
 	ma1 := [...][4]int{{1, 2, 3}, {1, 2}, {1, 2, 3, 4}}
 	fmt.Printf("ma1 Type: %T, ma1 value: %v\n", ma1, ma1)
 
-	for _, par := range ma1{
+	for _, par := range ma1 {
 		for _, child := range par {
 			fmt.Println(par, child)
 		}
@@ -99,17 +95,17 @@ func main() {
 
 	fmt.Println("-------------- Array Comparision ---------------")
 	a1 := [...]int{1, 2, 3}
-	a2 := [...]int{1, 2 ,3}
+	a2 := [...]int{1, 2, 3}
 	a3 := [...]int{1, 2, 4}
 
-	fmt.Println("a1 == a2", a1==a2)
-	fmt.Println("a1 == a3", a1==a3)
+	fmt.Println("a1 == a2", a1 == a2)
+	fmt.Println("a1 == a3", a1 == a3)
 
 	fmt.Println("-------------- Check if item exists in array -----------------")
 	ret := itemExists(a1, 1)
 	fmt.Println("Item found: ", ret)
 
-	 fmt.Println("------------- ")
+	fmt.Println("------------- ")
 
 	var ar1 [4]int
 	var ar2 [4]int
@@ -128,13 +124,11 @@ func main() {
 	ar3_2 = ar1
 	*/
 
-
 	// ar4 and ar5 are not equal or same
 	var ar4 [4]int
 	var ar5 [5]int
 	fmt.Println("is ar4 equal to ar5: ", reflect.DeepEqual(ar4, ar5))
 }
-
 
 func itemExists(arrayType interface{}, item interface{}) bool {
 
@@ -144,7 +138,7 @@ func itemExists(arrayType interface{}, item interface{}) bool {
 		panic("Invlid data type")
 	}
 
-	for i :=0; i < arr.Len(); i++ {
+	for i := 0; i < arr.Len(); i++ {
 		if arr.Index(i).Interface() == item {
 			return true
 		}
@@ -152,8 +146,6 @@ func itemExists(arrayType interface{}, item interface{}) bool {
 
 	return false
 }
-
-
 
 /*
 --------- Arrays Introduction ------------
@@ -207,4 +199,4 @@ is ar1 equal to ar2:  false
 ar3_1 [1 0 0 0]
 is ar4 equal to ar5:  false
 
- */
+*/

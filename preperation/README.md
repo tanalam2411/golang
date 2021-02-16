@@ -64,3 +64,10 @@
   - Select
   
  
+ 
+---
+1. type assertions
+2. unsafe pkg - unsafe pointers  etc
+3. context
+4. reflect pkg
+5. 

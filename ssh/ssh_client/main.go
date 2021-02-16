@@ -10,7 +10,6 @@ import (
 ssh server - https://github.com/gliderlabs/ssh
 */
 
-
 func main() {
 
 	//currentUser, err := user.Current()
@@ -28,7 +27,6 @@ func main() {
 		HostKeyCallback: ssh.InsecureIgnoreHostKey(),
 	}
 
-
 	client, err := ssh.Dial("tcp", "172.16.205.147:22", config)
 	if err != nil {
 		log.Fatal("Failed to dial: ", err)
@@ -43,7 +41,6 @@ func main() {
 		log.Fatal("Failed to create session: ", err)
 	}
 	defer session.Close()
-
 
 	session.Stdout = os.Stdout
 	session.Stderr = os.Stderr

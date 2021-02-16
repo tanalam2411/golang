@@ -41,7 +41,7 @@
         fmt.Printf("typedConst-> value: %v, type: %T\n", typedConst, typedConst)
     
         type MyString string
-        var ms string
+        var ms MyString
     
         // Unlike the typed constants, the untyped constants have no type.
         // Assigning them to a variable of any type compatible with strings works without error
@@ -49,7 +49,7 @@
         fmt.Printf("ms: value: %v, type: %T\n", ms, ms)
     
         // cannot use typedHello (type string) as type MyString in assignment
-        ms = typedHello
+        ms = typedConst
         fmt.Printf("ms: value: %v, type: %T\n", ms, ms)
     
     }

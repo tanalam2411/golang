@@ -13,7 +13,7 @@ func main() {
 
 	ctx := context.Background()
 	// Cancel the request if it takes more than 1 second to complete.
-	ctx, cancel := context.WithTimeout(ctx, 1 * time.Second)
+	ctx, cancel := context.WithTimeout(ctx, 1*time.Second)
 	defer cancel()
 	ctx = context.WithValue(ctx, "foo", "bar")
 
@@ -29,7 +29,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	if res.StatusCode != http.StatusOK{
+	if res.StatusCode != http.StatusOK {
 		log.Fatal(res.Status)
 	}
 	io.Copy(os.Stdout, res.Body)

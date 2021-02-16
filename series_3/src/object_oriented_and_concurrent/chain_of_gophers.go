@@ -17,7 +17,7 @@ func main() {
 	right := leftmost
 	left := leftmost
 
-	for i :=0; i < n; i++ {
+	for i := 0; i < n; i++ {
 		right = make(chan int)
 		go f(left, right)
 		left = right

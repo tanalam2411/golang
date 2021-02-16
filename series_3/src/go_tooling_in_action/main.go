@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"regexp"
 	_ "net/http/pprof"
+	"regexp"
 )
 
 // _ is for ignoring unsed package pprof

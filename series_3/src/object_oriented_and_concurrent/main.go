@@ -8,7 +8,7 @@ import (
 	"sort"
 )
 
-type Person struct { Name string }
+type Person struct{ Name string }
 
 func (p Person) Introduce() string { return p.Name }
 
@@ -26,7 +26,7 @@ type WriteCounter struct {
 	count int
 }
 
-func (w *WriteCounter) Write(b []byte) (int ,error) {
+func (w *WriteCounter) Write(b []byte) (int, error) {
 	w.count += len(b)
 	return w.ReadWriter.Write(b)
 }
@@ -41,10 +41,10 @@ var battle = make(chan string)
 
 func fightHandler(w http.ResponseWriter, r *http.Request) {
 	select {
-		case battle <- r.FormValue("usr"):
-			fmt.Fprintf(w, "You won")
-		case won := <-battle:
-			fmt.Fprintf(w, "You lost, %v is better than you.", won)
+	case battle <- r.FormValue("usr"):
+		fmt.Fprintf(w, "You won")
+	case won := <-battle:
+		fmt.Fprintf(w, "You lost, %v is better than you.", won)
 	}
 }
 
@@ -53,8 +53,8 @@ func main1() {
 	e.Name = "Person One"
 	e.EmployeeID = 123
 
-	fmt.Println( "Employee name is: ", e.Introduce())
-	fmt.Println( "Employee ID is: ", e.GetID())
+	fmt.Println("Employee name is: ", e.Introduce())
+	fmt.Println("Employee ID is: ", e.GetID())
 
 	buf := &bytes.Buffer{}
 	w := &WriteCounter{ReadWriter: buf}
@@ -79,7 +79,7 @@ func main1() {
 	http.HandleFunc("/next", handler)
 	http.HandleFunc("/fight", fightHandler)
 	go func() {
-		for i:=0; ; i++ {
+		for i := 0; ; i++ {
 			nextId <- i
 		}
 	}()
@@ -88,4 +88,3 @@ func main1() {
 	http.ListenAndServe("localhost:8000", nil)
 
 }
-

@@ -17,7 +17,7 @@ const One, Two = 1, 2
 
 var lang = "Go"
 
-var x int  // will set default null value of int i.e., 0
+var x int // will set default null value of int i.e., 0
 
 func main() {
 

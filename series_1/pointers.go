@@ -11,7 +11,6 @@ import (
 
 */
 
-
 func main() {
 	x := 15
 	a := &x // holds memory address of x

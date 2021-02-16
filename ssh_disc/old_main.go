@@ -30,13 +30,12 @@ func main() {
 
 	startTime := time.Now()
 
-	credentials := map[string] string {}
+	credentials := map[string]string{}
 	credentials["a"] = "b"
 	credentials["c"] = "d"
 	credentials["e"] = "f"
 	credentials["g"] = "h"
 	credentials["root"] = "FixStream"
-
 
 	_ = os.Mkdir(outDir, os.ModePerm)
 	//commands := []string{"hostname", `ifconfig eth0 | head -2 | tail -1 | tr -s " " " " | cut -d ":" -f2 | cut -d " " -f1`,
@@ -101,14 +100,12 @@ func inc(ip net.IP) {
 	}
 }
 
-
-
 func haha(ip string) {
 	count += 1
 	//fmt.Println("hahahahaha: ", ip, count, totalIps)
 }
 
-func sshExecutor(ip, username, password string, commands []string, credentials map[string] string) error {
+func sshExecutor(ip, username, password string, commands []string, credentials map[string]string) error {
 
 	defer wg.Done()
 	defer haha(ip)
@@ -149,7 +146,6 @@ func sshExecutor(ip, username, password string, commands []string, credentials m
 	//	return err
 	//}
 
-
 	defer client.Close()
 
 	// Create a session
@@ -161,14 +157,12 @@ func sshExecutor(ip, username, password string, commands []string, credentials m
 	}
 	defer session.Close()
 
-
 	stdin, err := session.StdinPipe()
 	if err != nil {
 		log.Println(err)
 		//wg.Done()
 		return err
 	}
-
 
 	outputFilePath := filepath.Join(outDir, fmt.Sprintf("%v_output_1.txt", ip))
 
@@ -213,8 +207,7 @@ func sshExecutor(ip, username, password string, commands []string, credentials m
 	return nil
 }
 
-
-func getSSHClient(ip string, credentials map[string] string) (ssh.Client, error) {
+func getSSHClient(ip string, credentials map[string]string) (ssh.Client, error) {
 
 	clientChan := make(chan *ssh.Client)
 	errorChan := make(chan error)
@@ -245,8 +238,8 @@ func getSSHClient(ip string, credentials map[string] string) (ssh.Client, error)
 				return client, err
 			}
 
-		case err := <- errorChan:
-			fmt.Printf("getSSHClient: ip: %v, err: %v, attempt:%v, len(cred):%v \n\n", ip, err, attempt, len(credentials) )
+		case err := <-errorChan:
+			fmt.Printf("getSSHClient: ip: %v, err: %v, attempt:%v, len(cred):%v \n\n", ip, err, attempt, len(credentials))
 			if err != nil {
 				attempt += 1
 			}
@@ -254,15 +247,14 @@ func getSSHClient(ip string, credentials map[string] string) (ssh.Client, error)
 				return client, err
 			}
 
-		//case <- timeout:
-		//	return client, err
+			//case <- timeout:
+			//	return client, err
 
 		}
 	}
 
 	return client, err
 }
-
 
 func authenticate(host, username, password string, timeout int, clientChan chan *ssh.Client, errorChan chan error) {
 	//hostKey, err := checkHostKey(host)
@@ -313,7 +305,6 @@ func authenticate(host, username, password string, timeout int, clientChan chan 
 	//return client, err
 
 }
-
 
 func checkHostKey(host string) (ssh.PublicKey, error) {
 	file, err := os.Open(filepath.Join(os.Getenv("HOME"), ".ssh", "known_hosts"))

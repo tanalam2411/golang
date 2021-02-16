@@ -9,7 +9,6 @@ func main() {
 	evenNums(0, 10)
 }
 
-
 func evenNums(from, to int) {
 
 	s := make([]int, 1)
@@ -21,12 +20,12 @@ func evenNums(from, to int) {
 
 	s[0] = 100
 	s = append(s, 1)
-	s = append(s, 2, 3 ,4)
+	s = append(s, 2, 3, 4)
 	a[0] = 1
 
 	fmt.Printf("%T, %v \n", a, a)
 	fmt.Printf("%T, %v \n", s, s)
-	for i, v :=range s{
+	for i, v := range s {
 		fmt.Println(i, v)
 	}
 }
