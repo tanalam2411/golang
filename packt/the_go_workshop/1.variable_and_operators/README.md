@@ -56,3 +56,7 @@ type Time struct {
 ...
 ```
 
+---
+
+- Zero values
+  - ![](./static/zero_values.jpg)

@@ -1,0 +1,7 @@
+https://golang.org/ref/spec#Constants
+https://golang.org/ref/spec#Introduction
+http://www.golangbootcamp.com/book/basics
+https://riptutorial.com/go/example/2193/multiple-variable-assignment
+https://golangbot.com/learn-golang-series/
+https://www.digitalocean.com/community/tutorial_series/how-to-code-in-go
+https://www.digitalocean.com/community/tutorials/how-to-use-variables-and-constants-in-go
