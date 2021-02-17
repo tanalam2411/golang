@@ -85,6 +85,10 @@
             "reflect"
         )
         
+        type S struct {
+            Name string
+        }
+        
         func main() {
             var b bool
             var i int
@@ -94,6 +98,7 @@
             var sli []int
             var mp map[string]string
             var ifc interface{}
+            var s1 S
         
             fmt.Printf("boolean: %v, %T, %v\n", b, b, reflect.ValueOf(b).IsZero())
             fmt.Printf("integer: %v, %T, %v\n", i, i, reflect.ValueOf(i).IsZero())
@@ -103,18 +108,25 @@
             fmt.Printf("slice: %v, %T, %v\n", sli, sli, sli == nil)
             fmt.Printf("map: %v, %T, %v\n", mp, mp, mp == nil)
             fmt.Printf("interface: %v, %T, %v\n", ifc, ifc, ifc == nil)
+            fmt.Printf("struct var: %v, %T, %v\n", s1, s1, reflect.ValueOf(s1).IsZero())
+            snew := new(S)
+            fmt.Printf("new struct: %v, %T, %v\n", snew, snew, reflect.ValueOf(snew).IsZero())
         }
       ```
       ```bash
-      boolean: false, bool, true
-      integer: 0, int, true
-      float: 0, float32, true
-      string: , string, true
-      array: [0 0 0 0 0 0 0 0 0 0], [10]int, true
-      slice: [], []int, true
-      map: map[], map[string]string, true
-      interface: <nil>, <nil>, true
+        boolean: false, bool, true
+        integer: 0, int, true
+        float: 0, float32, true
+        string: , string, true
+        array: [0 0 0 0 0 0 0 0 0 0], [10]int, true
+        slice: [], []int, true
+        map: map[], map[string]string, true
+        interface: <nil>, <nil>, true
+        struct var: {}, main.S, true
+        new struct: &{}, *main.S, false
       ```
+      
+      
 ##### Type Declarations:
 - Type declaration binds an identifier, the type name, to a type.
 - Type declarations cme in two forms:
